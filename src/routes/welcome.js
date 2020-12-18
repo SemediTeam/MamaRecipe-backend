@@ -1,8 +1,7 @@
-const welcomeRouter = require('express').Router();
+const welcomeRouter = require("express").Router();
 
 welcomeRouter.get("/", (_, res) => {
-    res.send("Welcome To Recipedia")
-})
+  res.send("Welcome To Recipedia");
+});
 
 module.exports = welcomeRouter;
-
