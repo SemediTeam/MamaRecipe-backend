@@ -1,6 +1,6 @@
 const welcomeRouter = require('express').Router();
 
-welcomeRouter.get("/", (req, res) => {
+welcomeRouter.get("/", (_, res) => {
     res.send("Welcome To Recipedia")
 })
 
