@@ -6,4 +6,5 @@ const uploadVideo = require("../helpers/middlewares/multiUploadVideo")
 
 recipesRouter.post("/", uploadImage, uploadVideo, recipesController.addRecipes);
 
+
 module.exports = recipesRouter;
