@@ -80,11 +80,11 @@ module.exports = {
       db.query(qs, blacklistToken, (err) => {
         if (!err) {
           resolve({
-            msg: `Logout Success`,
+            msg: "Logout Success",
           });
         } else {
           reject({
-            msg: `Logout Failed`,
+            msg: "Logout Failed",
           });
         }
       });

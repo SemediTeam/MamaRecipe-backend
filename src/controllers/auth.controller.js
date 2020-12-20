@@ -41,7 +41,7 @@ module.exports = {
     const bearerToken = req.header("x-access-token");
     if (!bearerToken) {
       res.json({
-        msg: `Token Null!`,
+        msg: "Token Null!",
       });
     } else {
       blacklistToken = {

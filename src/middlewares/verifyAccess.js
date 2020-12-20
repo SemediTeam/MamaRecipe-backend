@@ -11,16 +11,16 @@ module.exports = {
         if (!err) {
           if (!data[0]) {
             resolve({
-              msg: `Success`,
+              msg: "Success",
             });
           } else {
             reject({
-              msg: `Email already in use!`,
+              msg: "Email already in use!",
             });
           }
         } else {
           reject({
-            msg: `Error`,
+            msg: "Error",
           });
         }
       });
@@ -43,19 +43,19 @@ module.exports = {
     } else {
       const token = bearerToken.split(" ")[1];
       return new Promise((resolve, reject) => {
-        const qs = `SELECT token FROM blacklist WHERE token = ?`;
+        const qs = "SELECT token FROM blacklist WHERE token = ?";
         db.query(qs, token, (err, data) => {
           if (!err) {
             if (!data[0]) {
               resolve(token);
             } else {
               reject({
-                msg: `Invalid Token, either you not login yet or already logout`,
+                msg: "Invalid Token, either you not login yet or already logout",
               });
             }
           } else {
             reject({
-              msg: `Check Token Error`,
+              msg: "Check Token Error",
             });
           }
         });
