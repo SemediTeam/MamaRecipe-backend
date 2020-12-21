@@ -8,7 +8,7 @@ module.exports = {
       .searchRecipes(keyword)
       .then((data) => {
         if (!data.length) {
-          req.status(404).json({
+          res.status(404).json({
             msg: "Data not Found",
             status: 404,
           });
