@@ -10,7 +10,6 @@ module.exports = {
         if (!data.length) {
           res.status(404).json({
             msg: "Data not Found",
-            status: 404,
           });
         } else {
           form.success(res, data);
