@@ -29,10 +29,10 @@ module.exports = {
           auth,
         });
       })
-      .catch((err) => {
+      .catch((info) => {
         form.error(res, {
           msg: "Login Failed",
-          err,
+          info,
         });
       });
   },
