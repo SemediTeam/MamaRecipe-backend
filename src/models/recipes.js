@@ -13,8 +13,6 @@ module.exports = {
       });
     });
   },
-<<<<<<< HEAD
-=======
   getSingleRecipe: (params) => {
     return new Promise((resolve, reject) => {
       const queryString = `SELECT * FROM recipes WHERE id_recipe = ${params}`;
@@ -39,5 +37,4 @@ module.exports = {
       });
     });
   },
->>>>>>> 71702848e74712fb29edf80a66f5e62d4ce0289b
 };

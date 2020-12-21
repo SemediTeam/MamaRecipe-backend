@@ -5,18 +5,6 @@ module.exports = {
   addRecipes: (req, res) => {
     const { body } = req;
     const filePathImages = JSON.stringify(
-<<<<<<< HEAD
-      req.files.map(
-        (e) => process.env.LOCAL + "/images" + "/" + e.filename + " "
-      )
-    );
-    const filePathVideos = JSON.stringify(
-      req.files.map(
-        (e) => process.env.LOCAL + "/videos" + "/" + e.filename + " "
-      )
-    );
-
-=======
       req.files.images.map(
         (e) => "http://localhost:6000" + "/images" + "/" + e.filename + " "
       )
@@ -27,20 +15,10 @@ module.exports = {
         (e) => "http://localhost:6000" + "/videos" + "/" + e.filename + " "
       )
     );
->>>>>>> 71702848e74712fb29edf80a66f5e62d4ce0289b
     const insertBody = {
       ...body,
       updated_at: new Date(Date.now()),
       recipe_img: filePathImages,
-<<<<<<< HEAD
-      recipe_video: filePathVideos,
-    };
-    productsModel;
-
-    recipesModel
-      .addRecipes(insertBody, filePathImages, filePathVideos)
-      .then((data) => {
-=======
       recipe_video: filePathVideo,
     };
 
@@ -48,7 +26,6 @@ module.exports = {
       .addRecipes(insertBody, filePathImages, filePathVideo)
       .then((data) => {
         console.log(data);
->>>>>>> 71702848e74712fb29edf80a66f5e62d4ce0289b
         const successAdd = {
           msg: "Recipe has been added",
           data: {
@@ -66,8 +43,6 @@ module.exports = {
         form.error(res, error);
       });
   },
-<<<<<<< HEAD
-=======
 
   getSingleRecipe: (req, res) => {
     const { id } = req.params;
@@ -108,5 +83,4 @@ module.exports = {
         form.error(res, err);
       });
   },
->>>>>>> 71702848e74712fb29edf80a66f5e62d4ce0289b
 };
