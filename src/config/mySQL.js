@@ -7,6 +7,7 @@ const db = mySQL.createConnection({
   user: USER,
   password: PASS,
   database: DB,
+  multipleStatements: true
 });
 
 db.connect((err) => {

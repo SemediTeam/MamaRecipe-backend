@@ -5,18 +5,19 @@ module.exports ={
     addRecipes : (req, res) => {
         const { body } = req;
         const filePathImages = JSON.stringify(
-            req.files.map((e) => process.env.LOCAL + "/images" + "/" + e.filename + " ")
-        )
-        const filePathVideos = JSON.stringify(
-            req.files.map((e) => process.env.LOCAL + "/videos" + "/" + e.filename + " ")
+            req.files.images.map((e) => "http://localhost:6000" + "/images" + "/" + e.filename + " ")
         )
 
-        const insertBody = { ...body, updated_at: new Date(Date.now()), recipe_img: filePathImages, recipe_video: filePathVideos, };
-    productsModel
+         
+        const filePathVideo = JSON.stringify(
+            req.files.videos.map((e) => "http://localhost:6000" + "/videos" + "/" + e.filename + " ")
+        )
+        const insertBody = { ...body, updated_at: new Date(Date.now()), recipe_img: filePathImages, recipe_video: filePathVideo};
 
         recipesModel
-        .addRecipes(insertBody, filePathImages, filePathVideos)
+        .addRecipes(insertBody, filePathImages, filePathVideo)
         .then((data) => {
+            console.log(data);
             const successAdd = {
                 msg: "Recipe has been added",
                 data: {
@@ -34,4 +35,5 @@ module.exports ={
             form.error(res, error);
         })
     },
+
 }
