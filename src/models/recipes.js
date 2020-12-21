@@ -1,5 +1,5 @@
 const db = require("../config/mySQL");
-const { param } = require("../routes/recipes");
+
 module.exports = {
   addRecipes: (insertBody) => {
     return new Promise((resolve, reject) => {
