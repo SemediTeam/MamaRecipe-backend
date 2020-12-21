@@ -24,7 +24,7 @@ const upload = multer({
 });
 
 const multiUpload = (req, res, next) => {
-//   const uploadMulti = upload.array("images", 10);
+  //   const uploadMulti = upload.array("images", 10);
   const dataUpload = upload.fields([
     { name: "images", maxCount: 5 },
     { name: "videos", maxCount: 5 },
