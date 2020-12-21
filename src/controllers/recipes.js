@@ -83,4 +83,44 @@ module.exports = {
         form.error(res, err);
       });
   },
+  updateRecipes: (req, res) => {
+    const { body } = req;
+    const { id } = req.params;
+
+    const filePathImages = JSON.stringify(
+      req.files.images.map(
+        (e) => "http://localhost:6000" + "/images" + "/" + e.filename + " "
+      )
+    );
+
+    const filePathVideo = JSON.stringify(
+      req.files.videos.map(
+        (e) => "http://localhost:6000" + "/videos" + "/" + e.filename + " "
+      )
+    );
+    const insertBody = {
+      ...body,
+      recipe_img: filePathImages,
+      recipe_video: filePathVideo,
+    };
+
+    recipesModel
+      .updateRecipes(insertBody, id, res)
+      .then((data) => {
+        if (data.affectedRows === 0) {
+          res.status(404).json({
+            msg: "Recipe Not Found",
+          });
+        } else {
+          const newResObj = {
+            id_recipe: id,
+            ...insertBody,
+          };
+          form.success(res, newResObj);
+        }
+      })
+      .catch((err) => {
+        form.error(res, err);
+      });
+  },
 };

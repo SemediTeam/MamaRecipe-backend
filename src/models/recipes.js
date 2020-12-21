@@ -1,4 +1,5 @@
 const db = require("../config/mySQL");
+const { param } = require("../routes/recipes");
 module.exports = {
   addRecipes: (insertBody) => {
     return new Promise((resolve, reject) => {
@@ -29,6 +30,18 @@ module.exports = {
     return new Promise((resolve, reject) => {
       const queryString = "DELETE FROM recipes WHERE id_recipe = ?";
       db.query(queryString, [params], (err, data) => {
+        if (!err) {
+          resolve(data);
+        } else {
+          reject(err);
+        }
+      });
+    });
+  },
+  updateRecipes: (req, params) => {
+    return new Promise((resolve, reject) => {
+      const queryString = "UPDATE recipes SET ? WHERE id_recipe = " + params;
+      db.query(queryString, req, (err, data) => {
         if (!err) {
           resolve(data);
         } else {
