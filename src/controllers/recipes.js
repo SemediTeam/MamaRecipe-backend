@@ -5,18 +5,6 @@ module.exports = {
   addRecipes: (req, res) => {
     const { body } = req;
     const filePathImages = JSON.stringify(
-<<<<<<< HEAD
-      req.files.map(
-        (e) => process.env.LOCAL + "/images" + "/" + e.filename + " "
-      )
-    );
-    const filePathVideos = JSON.stringify(
-      req.files.map(
-        (e) => process.env.LOCAL + "/videos" + "/" + e.filename + " "
-      )
-    );
-
-=======
       req.files.images.map(
         (e) => "http://localhost:6000" + "/images" + "/" + e.filename + " "
       )
@@ -27,20 +15,10 @@ module.exports = {
         (e) => "http://localhost:6000" + "/videos" + "/" + e.filename + " "
       )
     );
->>>>>>> 71702848e74712fb29edf80a66f5e62d4ce0289b
     const insertBody = {
       ...body,
       updated_at: new Date(Date.now()),
       recipe_img: filePathImages,
-<<<<<<< HEAD
-      recipe_video: filePathVideos,
-    };
-    productsModel;
-
-    recipesModel
-      .addRecipes(insertBody, filePathImages, filePathVideos)
-      .then((data) => {
-=======
       recipe_video: filePathVideo,
     };
 
@@ -48,7 +26,6 @@ module.exports = {
       .addRecipes(insertBody, filePathImages, filePathVideo)
       .then((data) => {
         console.log(data);
->>>>>>> 71702848e74712fb29edf80a66f5e62d4ce0289b
         const successAdd = {
           msg: "Recipe has been added",
           data: {
@@ -66,8 +43,6 @@ module.exports = {
         form.error(res, error);
       });
   },
-<<<<<<< HEAD
-=======
 
   getSingleRecipe: (req, res) => {
     const { id } = req.params;
@@ -108,5 +83,44 @@ module.exports = {
         form.error(res, err);
       });
   },
->>>>>>> 71702848e74712fb29edf80a66f5e62d4ce0289b
+  updateRecipes: (req, res) => {
+    const { body } = req;
+    const { id } = req.params;
+
+    const filePathImages = JSON.stringify(
+      req.files.images.map(
+        (e) => "http://localhost:6000" + "/images" + "/" + e.filename + " "
+      )
+    );
+
+    const filePathVideo = JSON.stringify(
+      req.files.videos.map(
+        (e) => "http://localhost:6000" + "/videos" + "/" + e.filename + " "
+      )
+    );
+    const insertBody = {
+      ...body,
+      recipe_img: filePathImages,
+      recipe_video: filePathVideo,
+    };
+
+    recipesModel
+      .updateRecipes(insertBody, id, res)
+      .then((data) => {
+        if (data.affectedRows === 0) {
+          res.status(404).json({
+            msg: "Recipe Not Found",
+          });
+        } else {
+          const newResObj = {
+            id_recipe: id,
+            ...insertBody,
+          };
+          form.success(res, newResObj);
+        }
+      })
+      .catch((err) => {
+        form.error(res, err);
+      });
+  },
 };

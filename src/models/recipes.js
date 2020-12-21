@@ -1,4 +1,5 @@
 const db = require("../config/mySQL");
+const { param } = require("../routes/recipes");
 module.exports = {
   addRecipes: (insertBody) => {
     return new Promise((resolve, reject) => {
@@ -13,8 +14,6 @@ module.exports = {
       });
     });
   },
-<<<<<<< HEAD
-=======
   getSingleRecipe: (params) => {
     return new Promise((resolve, reject) => {
       const queryString = `SELECT * FROM recipes WHERE id_recipe = ${params}`;
@@ -39,5 +38,16 @@ module.exports = {
       });
     });
   },
->>>>>>> 71702848e74712fb29edf80a66f5e62d4ce0289b
+  updateRecipes: (req, params) => {
+    return new Promise((resolve, reject) => {
+      const queryString = "UPDATE recipes SET ? WHERE id_recipe = " + params;
+      db.query(queryString, req, (err, data) => {
+        if (!err) {
+          resolve(data);
+        } else {
+          reject(err);
+        }
+      });
+    });
+  },
 };
