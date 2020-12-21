@@ -4,6 +4,6 @@ const welcomeRouter = require("./welcome");
 const recipesRouter = require("./recipes")
 
 mainRouter.use("/", welcomeRouter);
-mainRouter.use("/recipes", recipesRouter )
+mainRouter.use("/recipe", recipesRouter )
 
 module.exports = mainRouter;
