@@ -72,11 +72,9 @@ module.exports = {
             msg: "Recipe not found",
           });
         } else {
-          const newResObj = {
-            msg: "Recipe deleted",
-            status: 200,
-          };
-          res.json(newResObj);
+            res.status(200).json({
+              msg: "Recipe deleted",
+            })
         }
       })
       .catch((err) => {
