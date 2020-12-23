@@ -18,6 +18,12 @@ app.use(cors());
 app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+// app.use(express.urlencoded({ extended: false }));
+// extended: false => menggunakan qs
+// extended: true => menggunakan querystring
+
+// menambahkan parser untuk raw json
+// app.use(express.json());
 
 app.use("/", mainRouter);
 

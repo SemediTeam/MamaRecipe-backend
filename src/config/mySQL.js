@@ -7,11 +7,14 @@ const db = mySQL.createConnection({
   user: USER,
   password: PASS,
   database: DB,
+  multipleStatements: true
 });
 
 db.connect((err) => {
   if (err) throw err;
   console.log("Database Connected");
+  // console.log(db)
 });
+
 
 module.exports = db;
