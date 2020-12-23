@@ -123,4 +123,14 @@ module.exports = {
         form.error(res, err);
       });
   },
+  getAllRecipesNew: (req, res) => {
+    recipesModel
+      .getAllRecipesNew()
+      .then((data) => {
+        res.status(200).json(data);
+      })
+      .catch((err) => {
+        res.status(500).json(err);
+      });
+  },
 };
