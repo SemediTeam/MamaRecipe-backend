@@ -6,5 +6,6 @@ this is repo for handling service from recipedia
 | POST | /auth/register | Register New User |
 | POST | /auth/login | Login User |
 | POST | /auth/logout | Logout User |
+| TBA | /auth/verify | Activate User |
 | TBA | /auth/reset | Reset Password User |
 | TBA | /auth/forgot | Forgot Password User |
