@@ -1,5 +1,5 @@
 const authModel = require("../models/auth.model");
-const form = require("../helper/form.helper");
+const form = require("../helpers/form.helper");
 
 module.exports = {
   register: (req, res) => {
@@ -7,14 +7,15 @@ module.exports = {
     authModel
       .postNewUser(body)
       .then(() => {
-        form.success(res, {
-          msg: "Registration Success",
-          name: body.name,
-          email: body.email,
-        });
+        form.success(
+          res,
+          "Registration Success",
+          { name: body.name, email: body.email },
+          200
+        );
       })
       .catch((err) => {
-        form.error(res, err);
+        form.error(res, "Bad Request", err, 400);
       });
   },
 
@@ -23,26 +24,17 @@ module.exports = {
     authModel
       .postLogin(body)
       .then((auth) => {
-        form.success(res, {
-          msg: "Login Success",
-          email: body.email,
-          auth,
-        });
+        form.success(res, "Login Success", { email: body.email, auth }, 200);
       })
       .catch((info) => {
-        form.error(res, {
-          msg: "Login Failed",
-          info,
-        });
+        form.error(res, "Login Failed", info, 400);
       });
   },
 
   logout: (req, res) => {
     const bearerToken = req.header("x-access-token");
     if (!bearerToken) {
-      res.json({
-        msg: "Token Null!",
-      });
+      form.error(res, "Token Null", err, 400);
     } else {
       blacklistToken = {
         token: bearerToken.split(" ")[1],
@@ -51,10 +43,10 @@ module.exports = {
       authModel
         .postLogout(blacklistToken)
         .then((data) => {
-          form.success(res, data);
+          form.success(res, "Logout Success", data, 200);
         })
         .catch((err) => {
-          form.error(res, err);
+          form.error(res, "Logout Failed", err, 400);
         });
     }
   },

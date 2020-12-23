@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
-const db = require("../config/mySQL");
-const form = require("../helper/form.helper");
+const db = require("../../config/mySQL");
+const form = require("../form.helper");
 
 module.exports = {
   isRegistered: (req, res, next) => {
@@ -10,18 +10,12 @@ module.exports = {
       db.query(qs, email, (err, data) => {
         if (!err) {
           if (!data[0]) {
-            resolve({
-              msg: "Success",
-            });
+            resolve("Success");
           } else {
-            reject({
-              msg: "Email already in use!",
-            });
+            reject("Email already in use!");
           }
         } else {
-          reject({
-            msg: "Error",
-          });
+          reject("Empty Field");
         }
       });
     })
@@ -29,17 +23,14 @@ module.exports = {
         next();
       })
       .catch((err) => {
-        form.error(res, err);
+        form.error(res, "Encountered error", err, 400);
       });
   },
 
   isLogin: (req, res, next) => {
     const bearerToken = req.header("x-access-token");
     if (!bearerToken) {
-      form.error(res, {
-        msg: "Please Login First",
-        status: 401,
-      });
+      form.error(res, "Please Login First", err, 401);
     } else {
       const token = bearerToken.split(" ")[1];
       return new Promise((resolve, reject) => {
@@ -49,14 +40,12 @@ module.exports = {
             if (!data[0]) {
               resolve(token);
             } else {
-              reject({
-                msg: "Invalid Token, either you not login yet or already logout",
-              });
+              reject(
+                "You Already Logout"
+              );
             }
           } else {
-            reject({
-              msg: "Check Token Error",
-            });
+            reject("Check Token Error");
           }
         });
       })
@@ -66,15 +55,11 @@ module.exports = {
             req.decodedToken = decodedToken;
             next();
           } catch (err) {
-            form.error(res, {
-              msg: "Invalid Token",
-              status: 401,
-              err,
-            });
+            form.error(res, "Invalid Token", err, 401);
           }
         })
         .catch((err) => {
-          form.error(res, err);
+          form.error(res, "Error occurred", err, 400);
         });
     }
   },

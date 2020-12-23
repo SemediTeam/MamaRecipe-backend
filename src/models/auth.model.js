@@ -6,6 +6,24 @@ const db = require("../config/mySQL");
 module.exports = {
   postNewUser: (body) => {
     return new Promise((resolve, reject) => {
+      // if (body.name === 0) {
+      //   return reject({
+      //     msg: "Please input Name",
+      //   });
+      // } else if (body.email === 0) {
+      //   return reject({
+      //     msg: "Please input Email",
+      //   });
+      // } else if (body.phone === 0) {
+      //   return reject({
+      //     msg: "Please input Phone",
+      //   });
+      // } else if (body.password === 0) {
+      //   return reject({
+      //     msg: "Please input Password",
+      //   });
+      // }
+
       const saltRounds = 10;
       bcrypt.genSalt(saltRounds, (err, salt) => {
         if (err) {
@@ -32,39 +50,55 @@ module.exports = {
   postLogin: (body) => {
     return new Promise((resolve, reject) => {
       const { email, password } = body;
+      // if (body.email == 0 || body.password == 0) {
+      //   return reject({
+      //     msg: "Please enter the required fields",
+      //   });
+      // }
       const qs = "SELECT password FROM users WHERE email = ?";
       db.query(qs, email, (err, data) => {
         if (err) {
-          reject({
-            msg: "Error SQL",
-            status: 500,
-            err,
-          });
+          reject(
+            "Error SQL"
+            //   {
+            //   msg: "Error SQL",
+            //   status: 500,
+            //   err,
+            // }
+          );
         }
         if (!data[0]) {
-          reject({
-            msg: "User Not Found",
-            status: 404,
-          });
+          reject(
+            "User Not Found"
+            //   {
+            //   msg: "User Not Found",
+            //   status: 404,
+            // }
+          );
         } else {
           bcrypt.compare(password, data[0].password, (err, result) => {
             if (err) {
-              reject({
-                msg: "Hash Error",
-                status: 500,
-                err,
-              });
+              reject(
+                "Hash Error"
+                //   {
+                //   msg: "Hash Error",
+                //   status: 500,
+                // }
+              );
             }
             if (!result) {
-              reject({
-                msg: "Wrong Password",
-                status: 401,
-              });
+              reject(
+                "Wrong Password"
+                //   {
+                //   msg: "Wrong Password",
+                //   status: 401,
+                // }
+              );
             } else {
               const payload = {
                 id: data[0].id_user,
                 name: data[0].name,
-                email: data[0].email
+                email: data[0].email,
               };
               const secret = process.env.SECRET_KEY;
               const token = jwt.sign(payload, secret, { expiresIn: "24h" });
@@ -79,15 +113,21 @@ module.exports = {
   postLogout: (blacklistToken) => {
     return new Promise((resolve, reject) => {
       const qs = "INSERT INTO blacklist SET ?";
-      db.query(qs, blacklistToken, (err) => {
+      db.query(qs, blacklistToken, (err, result) => {
         if (!err) {
-          resolve({
-            msg: "Logout Success",
-          });
+          resolve(
+            result
+            //   {
+            //   msg: "Logout Success",
+            // }
+          );
         } else {
-          reject({
-            msg: "Logout Failed",
-          });
+          reject(
+            err
+            //   {
+            //   msg: "Logout Failed",
+            // }
+          );
         }
       });
     });
