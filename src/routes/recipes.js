@@ -2,11 +2,12 @@ const recipesRouter = require("express").Router();
 
 const recipesController = require("../controllers/recipes");
 const uploadMiddleware = require("../helpers/middlewares/multiUpload");
+const checkToken = require("../helpers/middlewares/verifyAccess")
 
-recipesRouter.post("/", uploadMiddleware, recipesController.addRecipes);
+recipesRouter.get("/", recipesController.getAllRecipe)
 recipesRouter.get("/:id", recipesController.getSingleRecipe);
-recipesRouter.delete("/:id", recipesController.deleteRecipes);
-recipesRouter.put("/:id", uploadMiddleware, recipesController.updateRecipes);
-// recipesRouter.post("/", recipesController.addRecipes);
+recipesRouter.post("/", checkToken.isLogin, uploadMiddleware, recipesController.addRecipes);
+recipesRouter.patch("/:id", checkToken.isLogin, uploadMiddleware, recipesController.updateRecipes);
+recipesRouter.delete("/:id", checkToken.isLogin, recipesController.deleteRecipes);
 
 module.exports = recipesRouter;

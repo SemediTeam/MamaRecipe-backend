@@ -4,6 +4,8 @@ const form = require("../helpers/form");
 module.exports = {
   addRecipes: (req, res) => {
     const { body } = req;
+    // const { id_user } = req.body;
+    const user_id = req.decodedToken.id_user
     const filePathImages = JSON.stringify(
       req.files.images.map(
         (e) => "http://localhost:6000" + "/images" + "/" + e.filename + " "
@@ -18,10 +20,10 @@ module.exports = {
     const insertBody = {
       ...body,
       updated_at: new Date(Date.now()),
+      id_user: user_id,
       recipe_img: filePathImages,
       recipe_video: filePathVideo,
     };
-
     recipesModel
       .addRecipes(insertBody, filePathImages, filePathVideo)
       .then((data) => {
@@ -42,6 +44,18 @@ module.exports = {
         };
         form.error(res, error);
       });
+  },
+
+  getAllRecipe: (req, res) => {
+    recipesModel
+    .getAllRecipe()
+    .then((data) => {
+      form.success(res, data)
+      }
+    )
+    .catch((err) => {
+      form.error(res, err);
+    })
   },
 
   getSingleRecipe: (req, res) => {
@@ -72,11 +86,9 @@ module.exports = {
             msg: "Recipe not found",
           });
         } else {
-          const newResObj = {
-            msg: "Recipe deleted",
-            status: 200,
-          };
-          res.json(newResObj);
+            res.status(200).json({
+              msg: "Recipe deleted",
+            })
         }
       })
       .catch((err) => {
@@ -85,7 +97,7 @@ module.exports = {
   },
   updateRecipes: (req, res) => {
     const { body } = req;
-    const { id } = req.params;
+    const { id } = req.params; 
 
     const filePathImages = JSON.stringify(
       req.files.images.map(
@@ -105,7 +117,7 @@ module.exports = {
     };
 
     recipesModel
-      .updateRecipes(insertBody, id, res)
+      .updateRecipes(insertBody, id)
       .then((data) => {
         if (data.affectedRows === 0) {
           res.status(404).json({
@@ -120,7 +132,71 @@ module.exports = {
         }
       })
       .catch((err) => {
-        form.error(res, err);
-      });
+        form.error(res, err)
+      })
   },
+
+  
+    // if (req.files.images) {
+    //   const filePathImages = JSON.stringify(
+    //     req.files.images.map(
+    //       (e) => "http://localhost:6000" + "/images" + "/" + e.filename + " "
+    //     )
+    //   );
+    //   filePathImages = filePathImages.join(',')
+    //   updateData = {
+    //     ...updateData,
+    //     recipe_img: filePathImages
+    //   }
+    // } 
+
+    // recipesModel
+    //   .deleteImages(id)
+    //   .then((data) => {
+        // if (data[0] != '') {
+        //   data[0].filePathImages.split(',').map((images) => {
+        //     fs.unlink(`${images}`, (err) => {
+        //       if (err) {
+        //         console.log(err, 'Error')
+        //         return
+        //       } else {
+        //         console.log(`${images} deleted`);
+        //       }
+        //     })
+        //   })
+        // }
+      //     form.success(res, newResObj);
+      //   }
+      // })
+      // .catch((err) => {
+      //   form.error(res, err);
+      // });
+
+      // if (req.files.videos) {
+      //   const filePathVideo = JSON.stringify(
+      //     req.files.videos.map(
+      //       (e) => "http://localhost:6000" + "/videos" + "/" + e.filename + " "
+      //     )
+      //   );
+      //   filePathImages = filePathVideos.join(',')
+      //   updateData = {
+      //     ...updateData,
+      //     recipe_video: filePathVideo
+      //   }
+      // }
+      // recipesModel
+      // .deleteVideo(id)
+      // .then((data) => {
+      //   if (data[0 != '']) {
+      //     data[0].recipe_video.split(',').map((videos) => {
+      //       fs.unlink(`${videos}`, (err) => {
+      //         if (err) {
+      //           console.log(err);
+      //         } else {
+      //           console.log(`${videos} deletad`);
+      //         }
+      //       })
+      //     })
+      //   }
+      // })
 };
