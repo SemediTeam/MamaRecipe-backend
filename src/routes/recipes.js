@@ -5,6 +5,7 @@ const uploadMiddleware = require("../helpers/middlewares/multiUpload");
 
 recipesRouter.post("/", uploadMiddleware, recipesController.addRecipes);
 recipesRouter.get("/new", recipesController.getAllRecipesNew);
+recipesRouter.get("/popular", recipesController.getAllRecipesPopular);
 recipesRouter.get("/:id", recipesController.getSingleRecipe);
 recipesRouter.delete("/:id", recipesController.deleteRecipes);
 recipesRouter.put("/:id", uploadMiddleware, recipesController.updateRecipes);

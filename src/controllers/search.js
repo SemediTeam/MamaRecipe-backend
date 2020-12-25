@@ -29,18 +29,21 @@ module.exports = {
     console.log(addQuery, urlQuery, offset, limit);
     searchModel
       .totalResult(addQuery)
-      .then((result) => {
+      .then((data) => {
         searchModel
           .searchRecipes(
             addQuery,
             urlQuery,
-            result[0].total_result,
+            data[0].total_result,
             page,
             offset,
             limit
           )
           .then((data) => {
             res.status(200).json(data);
+          })
+          .catch(() => {
+            res.status(404).json({ msg: `${recipe_name} not found` });
           });
       })
       .catch((err) => {
