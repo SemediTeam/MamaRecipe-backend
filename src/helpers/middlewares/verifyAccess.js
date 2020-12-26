@@ -30,7 +30,7 @@ module.exports = {
   isLogin: (req, res, next) => {
     const bearerToken = req.header("x-access-token");
     if (!bearerToken) {
-      form.error(res, "Please Login First", err, 401);
+      form.error(res, "Please Login First", "err", 401);
     } else {
       const token = bearerToken.split(" ")[1];
       return new Promise((resolve, reject) => {
