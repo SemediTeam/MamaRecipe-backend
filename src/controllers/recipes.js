@@ -5,7 +5,7 @@ module.exports = {
   addRecipes: (req, res) => {
     const { body } = req;
     // const { id_user } = req.body;
-    const user_id = req.decodedToken.id_user
+    const user_id = req.decodedToken.id_user;
     const filePathImages = JSON.stringify(
       req.files.images.map(
         (e) => "http://localhost:6000" + "/images" + "/" + e.filename + " "
@@ -48,14 +48,13 @@ module.exports = {
 
   getAllRecipe: (req, res) => {
     recipesModel
-    .getAllRecipe()
-    .then((data) => {
-      form.success(res, data)
-      }
-    )
-    .catch((err) => {
-      form.error(res, err);
-    })
+      .getAllRecipe()
+      .then((data) => {
+        form.success(res, data);
+      })
+      .catch((err) => {
+        form.error(res, err);
+      });
   },
 
   getSingleRecipe: (req, res) => {
@@ -86,9 +85,9 @@ module.exports = {
             msg: "Recipe not found",
           });
         } else {
-            res.status(200).json({
-              msg: "Recipe deleted",
-            })
+          res.status(200).json({
+            msg: "Recipe deleted",
+          });
         }
       })
       .catch((err) => {
@@ -97,7 +96,7 @@ module.exports = {
   },
   updateRecipes: (req, res) => {
     const { body } = req;
-    const { id } = req.params; 
+    const { id } = req.params;
 
     const filePathImages = JSON.stringify(
       req.files.images.map(
@@ -132,7 +131,27 @@ module.exports = {
         }
       })
       .catch((err) => {
-        form.error(res, err)
+        form.error(res, err);
+      });
+  },
+  getAllRecipesNew: (req, res) => {
+    recipesModel
+      .getAllRecipesNew()
+      .then((data) => {
+        res.status(200).json(data);
       })
+      .catch((err) => {
+        res.status(500).json(err);
+      });
+  },
+  getAllRecipesPopular: (req, res) => {
+    recipesModel
+      .getAllRecipesPopular()
+      .then((data) => {
+        res.status(200).json(data);
+      })
+      .catch((err) => {
+        res.status(500).json(err);
+      });
   },
 };
