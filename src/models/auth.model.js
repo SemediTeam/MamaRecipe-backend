@@ -96,7 +96,7 @@ module.exports = {
               );
             } else {
               const payload = {
-                id: data[0].id_user,
+                id_user: data[0].id_user,
                 name: data[0].name,
                 email: data[0].email,
               };
