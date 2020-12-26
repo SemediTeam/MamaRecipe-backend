@@ -12,7 +12,7 @@ module.exports = {
         if (!err) {
           resolve({
             status: 200,
-            msg: `Recipe ${id_recipe}  has been bookmarked`,
+            msg: `Recipe ${id_recipe} succesfully bookmarked`,
             bookmarkId: data.insertId,
           });
         } else {
@@ -62,7 +62,7 @@ module.exports = {
         if (!err) {
           resolve({
             status: 200,
-            msg: `un Bookmark: ${bookmarkId}`,
+            msg: `Succesfully unBookmark: ${bookmarkId}`,
           });
         } else {
           reject({
