@@ -26,24 +26,22 @@ module.exports = {
 
     const updateBody = {
       ...body,
-    //   user_img: filePath,
+      //   user_img: filePath,
       updated_at: new Date(Date.now()),
     };
-
     userModel
       .updateUser(updateBody, id)
       .then((data) => {
         // if (req.file == undefined) {
         //   form.error(res, "No Images Selected", "err", 400);
         // } else {
-          form.success(
-            res,
-            "Data successfuly updated",
-            { id: data.updateId, ...updateBody },
-            200
-          );
-        }
-      )
+        form.success(
+          res,
+          "Data successfully updated",
+          { id: data.updateId, ...updateBody },
+          200
+        );
+      })
       .catch((err) => {
         form.error(res, "Encountered Error", err, 400);
       });

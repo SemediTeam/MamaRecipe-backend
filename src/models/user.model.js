@@ -3,7 +3,8 @@ const db = require("../config/mySQL");
 module.exports = {
   getUserById: (req) => {
     return new Promise((resolve, reject) => {
-      const qs = "SELECT id_user, name, email, phone, user_img FROM users WHERE id_user = ?";
+      const qs =
+        "SELECT id_user, name, email, phone, user_img FROM users WHERE id_user = ?";
       db.query(qs, req, (err, data) => {
         if (!err) {
           resolve(data);
@@ -28,10 +29,10 @@ module.exports = {
   },
 
   // updateUserImg: (body) => {
-  //   const { id_user, image } = body;
+  //   const { user_img } = body;
   //   return new Promise((resolve, reject) => {
-  //       const qs = "UPDATE users SET user_img = ? WHERE id_user = ?";
-  //     db.query(qs, [image, id_user], (err, data) => {
+  //     const qs = "UPDATE users SET user_img = ? WHERE id_user = ?";
+  //     db.query(qs, user_img, (err, data) => {
   //       if (!err) {
   //         resolve(data);
   //       } else {
