@@ -79,7 +79,7 @@ module.exports = {
   },
   getAllRecipesPopular: () => {
     return new Promise((resolve, reject) => {
-      const queryString = `SELECT tr.id_recipe, tr.recipe_name, IFNULL(rl.likes, 0) as count_likes FROM recipes tr LEFT JOIN (SELECT id_recipe, count(id_recipe) as 'likes' FROM likes GROUP BY id_recipe) rl ON tr.id_recipe = rl.id_recipe ORDER BY count_likes DESC LIMIT 6 OFFSET 0`;
+      const queryString = `SELECT tr.id_recipe, tr.recipe_name, tr.recipe_img, tr.recipe_desc, IFNULL(rl.likes, 0) as count_likes FROM recipes tr LEFT JOIN (SELECT id_recipe, count(id_recipe) as 'likes' FROM likes GROUP BY id_recipe) rl ON tr.id_recipe = rl.id_recipe ORDER BY count_likes DESC LIMIT 6 OFFSET 0`;
       db.query(queryString, (err, data) => {
         if (!err) {
           resolve(data);
