@@ -7,7 +7,7 @@ const verifyAccess = require("../helpers/middlewares/verifyAccess");
 
 userRouter.get("/:id", verifyAccess.isLogin, userController.getUserById);
 userRouter.patch("/:id", verifyAccess.isLogin, userController.updateUser);
-userRouter.patch("/img/:id", uploadImg.singleUpload, userController.updateUser);
+userRouter.patch("/img/:id", uploadImg.singleUpload, verifyAccess.isLogin, userController.updateUser);
 
 // userRouter.post("/liked/:recipeId", verifyAccess.isLogin, userController.addLike)
 // userRouter.get ("/liked/:userId", verifyAccess.isLogin, userController.getLike)
