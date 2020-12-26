@@ -54,38 +54,7 @@ module.exports = {
       });
     });
   },
-  deleteImages: (id) => {
-    return new Promise((resolve, reject) => {
-      const queryStr = `SELECT recipe_img FROM recipes WHERE id_recipe = ?`
-      db.query(queryStr, id, (err, data) => {
-        if (!err) {
-          resolve(data)
-        } else {
-          reject({
-            status: 500,
-            message: `Encountered error`,
-            details: err
-          })
-        }
-      })
-    })
-  },
-  deleteVideos: (id) => {
-    return new Promise((resolve, reject) => {
-      const queryStr = `SELECT recipe_video FROM recipes WHERE id_recipe = ?`
-      db.query(queryStr, id, (err, data) => {
-        if (!err) {
-          resolve(data)
-        } else {
-          reject({
-            status: 500,
-            message: `Encountered error`,
-            details: err
-          })
-        }
-      })
-    })
-  },
+
   updateRecipes: (req, params) => {
     return new Promise((resolve, reject) => {     
       const queryString = "UPDATE recipes SET ? WHERE id_recipe = " + params;
