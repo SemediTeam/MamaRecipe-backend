@@ -67,7 +67,7 @@ module.exports = {
   },
   getAllRecipesNew: () => {
     return new Promise((resolve, reject) => {
-      const queryString = `SELECT id_recipe, recipe_name, recipe_img FROM recipes ORDER BY created_at DESC`;
+      const queryString = `SELECT id_recipe, recipe_name, recipe_img, recipe_desc FROM recipes ORDER BY created_at DESC`;
       db.query(queryString, (err, data) => {
         if (!err) {
           resolve(data);
