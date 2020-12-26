@@ -55,7 +55,7 @@ module.exports = {
       //     msg: "Please enter the required fields",
       //   });
       // }
-      const qs = "SELECT password FROM users WHERE email = ?";
+      const qs = "SELECT id_user, password FROM users WHERE email = ?";
       db.query(qs, email, (err, data) => {
         if (err) {
           reject(
