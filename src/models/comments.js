@@ -28,7 +28,6 @@ module.exports = {
 
   getComment: (recipeId) => {
     return new Promise((resolve, reject) => {
-
       const queryString = `SELECT r.id_recipe, r.recipe_name, u.name, c.id_user, c.id_recipe, c.comment, c.created_at FROM comment AS c JOIN users AS u ON u.id_user = c.id_user JOIN recipes AS r ON r.id_recipe = c.id_recipe WHERE c.id_recipe = ?`;
       db.query(queryString, recipeId, (err, data) => {
         if (!err) {
@@ -39,8 +38,8 @@ module.exports = {
               data: data,
             });
           } else {
-            resolve({
-                data: 'Nothing comment, recipe not found'
+            reject({
+              data: "Nothing comment, recipe not found",
             });
           }
         } else {

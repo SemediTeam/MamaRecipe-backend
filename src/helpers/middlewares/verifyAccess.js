@@ -40,9 +40,7 @@ module.exports = {
             if (!data[0]) {
               resolve(token);
             } else {
-              reject(
-                "You Already Logout"
-              );
+              reject("You Already Logout");
             }
           } else {
             reject("Check Token Error");
