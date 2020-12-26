@@ -59,7 +59,7 @@ module.exports = {
           }
         })
         .catch((err) => {
-          form.error(res, "Error occurred", err, 400);
+          form.error(res, "Error occurred", err, 401);
         });
     }
   },
