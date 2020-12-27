@@ -35,4 +35,19 @@ module.exports = {
         res.status(500).json(err);
       });
   },
+  deleteLikeRecipe: (req, res) => {
+    const { id_recipe } = req.params;
+    const id_user = req.decodedToken.id_user;
+    likesModels
+      .deleteLikeRecipe(id_user, id_recipe)
+      .then(() => {
+        const resObject = {
+          msg: "Unlike Recipe",
+        };
+        res.status(200).json(resObject);
+      })
+      .catch((err) => {
+        form.error(res, err);
+      });
+  },
 };
