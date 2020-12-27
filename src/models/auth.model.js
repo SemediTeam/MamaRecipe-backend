@@ -250,7 +250,6 @@ module.exports = {
       const { otp } = body;
       const qs = "SELECT otp FROM otp WHERE otp = ?";
       db.query(qs, otp, (err, data) => {
-        console.log(qs);
         if (err) {
           reject("Error Occured");
         }
