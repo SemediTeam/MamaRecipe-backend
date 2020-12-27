@@ -83,6 +83,7 @@ module.exports = {
         form.error(res, "Error Send Link Reset Password", err, 500);
       });
   },
+  
   sendOtp: (req, res) => {
     const { body } = req;
     authModel

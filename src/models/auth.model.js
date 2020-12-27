@@ -241,35 +241,25 @@ module.exports = {
       });
     });
   },
+
   sendOtp: (body) => {
     return new Promise((resolve, reject) => {
       if (body.otp == 0) {
-        return reject({
-          msg: "input otp",
-        });
+        return reject("Please Input OTP");
       }
       const { otp } = body;
-      const queryString = "SELECT otp FROM otp WHERE otp = ?";
-      db.query(queryString, otp, (err, data) => {
-        console.log(queryString);
+      const qs = "SELECT otp FROM otp WHERE otp = ?";
+      db.query(qs, otp, (err, data) => {
+        console.log(qs);
         if (err) {
-          reject({
-            msg: "Error WOI",
-            status: 500,
-            err,
-          });
+          reject("Error Occured");
         }
         console.log(data);
         if (data == undefined) {
-          return reject({
-            msg: "Error",
-          });
+          return reject("Error Occured");
         }
         if (!data[0]) {
-          reject({
-            msg: "OTP not found",
-            status: 404,
-          });
+          reject("Wrong OTP");
         } else {
           resolve(data);
         }
