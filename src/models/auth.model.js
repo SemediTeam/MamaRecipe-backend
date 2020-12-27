@@ -4,6 +4,14 @@ const jwt = require("jsonwebtoken");
 const db = require("../config/mySQL");
 const sendEmail = require("../helpers/middlewares/sendEmail");
 
+async function insertOtp(otp) {
+  await db.query("INSERT INTO otp SET otp = ?", otp);
+}
+
+// async function saveId(id_user) {
+//   await db.query("INSERT INTO otp SET id_user = ?", id_user);
+// }
+
 module.exports = {
   postNewUser: (body) => {
     return new Promise((resolve, reject) => {
@@ -48,7 +56,7 @@ module.exports = {
               resolve(
                 sendEmail({
                   to: body.email,
-                  subject: "Verify Account Mama Recipe",
+                  subject: "Verify Account - Mama Recipe",
                   html: `<h4>Verify Email</h4>
                            <p>Thanks for registering!</p>
                            <p>Please click the below link to verify your email address:</p>
@@ -191,7 +199,7 @@ module.exports = {
     const decodedToken = jwt.verify(tokenId, process.env.SECRET_KEY);
     const email = decodedToken.email;
     return new Promise((resolve, reject) => {
-      const qs = `UPDATE users SET isVerified = 1 WHERE email = ?`;
+      const qs = "UPDATE users SET isVerified = 1 WHERE email = ?";
       db.query(qs, email, (err, data) => {
         if (!err) {
           resolve(data);
@@ -201,4 +209,60 @@ module.exports = {
       });
     });
   },
+
+  forgot: (body) => {
+    const { email } = body;
+    return new Promise((resolve, reject) => {
+      const qs = "SELECT email, id_user FROM users WHERE email = ?";
+      // saveId(id_user)
+      db.query(qs, email, (err, data) => {
+        if (err) {
+          reject(err);
+        }
+        if (data.length !== 0) {
+          let otp = Math.floor(100000 + Math.random() * 900000);
+          insertOtp(otp);
+
+          resolve(
+            sendEmail({
+              to: body.email,
+              subject: "Reset Password Mama Recipe",
+              html: `<h4>Reset Password</h4>
+                     <p>Here Your OTP for Reset Password</p>
+                     <p style="font-weight: bold;">${otp}<p>
+                     <p>Please click the below link to reset your password</p>
+          <p><a href="${process.env.LOCAL}/auth/otp/">${process.env.LOCAL}/auth/otp/</a></p>`,
+            })
+          );
+        } else {
+          reject("Email Not Found");
+        }
+      });
+    });
+  },
+
+  //       if (!err) {
+  //         if (data[0]) {
+  //           const payload = {
+  //             email: data[0].email,
+  //           };
+  //           const tokenForgot = jwt.sign(payload, process.env.SECRET_KEY, {
+  //             expiresIn: 1000 * 60 * 15,
+  //           });
+  //           resolve({
+  //             status: 200,
+  //             email: email,
+  //             message: `${process.env.HOSTNAME}/auth/reset/${tokenForgot}`,
+  //           });
+  //         } else {
+  //           reject("Email Not Found");
+  //         }
+  //       } else {
+  //         reject("Error Occured");
+  //       }
+  //     });
+  //   });
+  // },
+
+ 
 };
