@@ -1,5 +1,6 @@
 const authModel = require("../models/auth.model");
 const form = require("../helpers/form.helper");
+// const sendEmail = require("../helpers/middlewares/sendEmail");
 
 module.exports = {
   register: (req, res) => {

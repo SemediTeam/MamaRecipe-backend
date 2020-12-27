@@ -20,4 +20,18 @@ module.exports = {
       });
     });
   },
+  getRecipeLike: (req) => {
+    const { id } = req.params;
+    return new Promise((resolve, reject) => {
+      const queryString =
+        "SELECT a.recipe_name, a.recipe_img FROM recipes as a JOIN likes as s ON s.id_recipe=a.id_recipe WHERE s.id_user=?";
+      db.query(queryString, id, (err, data) => {
+        if (!err) {
+          resolve(data);
+        } else {
+          reject(err);
+        }
+      });
+    });
+  },
 };
