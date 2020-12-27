@@ -30,7 +30,7 @@ module.exports = {
   isLogin: (req, res, next) => {
     const bearerToken = req.header("x-access-token");
     if (!bearerToken) {
-      form.error(res, "Please Login First", err, 401);
+      form.error(res, "Please Login First", "err", 401);
     } else {
       const token = bearerToken.split(" ")[1];
       return new Promise((resolve, reject) => {
@@ -40,9 +40,7 @@ module.exports = {
             if (!data[0]) {
               resolve(token);
             } else {
-              reject(
-                "You Already Logout"
-              );
+              reject("You Already Logout");
             }
           } else {
             reject("Check Token Error");
@@ -59,7 +57,7 @@ module.exports = {
           }
         })
         .catch((err) => {
-          form.error(res, "Error occurred", err, 400);
+          form.error(res, "Error occurred", err, 401);
         });
     }
   },

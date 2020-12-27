@@ -8,13 +8,13 @@ module.exports = {
     const user_id = req.decodedToken.id_user;
     const filePathImages = JSON.stringify(
       req.files.images.map(
-        (e) => "http://localhost:6000" + "/images" + "/" + e.filename + " "
+        (e) => `http://localhost:${process.env.PORT}` + "/images" + "/" + e.filename + " "
       )
     );
 
     const filePathVideo = JSON.stringify(
       req.files.videos.map(
-        (e) => "http://localhost:6000" + "/videos" + "/" + e.filename + " "
+        (e) => `http://localhost:${process.env.PORT}` + "/videos" + "/" + e.filename + " "
       )
     );
     const insertBody = {
@@ -100,13 +100,13 @@ module.exports = {
 
     const filePathImages = JSON.stringify(
       req.files.images.map(
-        (e) => "http://localhost:6000" + "/images" + "/" + e.filename + " "
+        (e) => `http://localhost:${process.env.PORT}` + "/images" + "/" + e.filename + " "
       )
     );
 
     const filePathVideo = JSON.stringify(
       req.files.videos.map(
-        (e) => "http://localhost:6000" + "/videos" + "/" + e.filename + " "
+        (e) => `http://localhost:${process.env.PORT}` + "/videos" + "/" + e.filename + " "
       )
     );
     const insertBody = {
