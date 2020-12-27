@@ -6,8 +6,6 @@ module.exports = {
       id_user: id_users,
       id_recipe: recipe_id
     };
-
-    console.log("fck" + body);
     return new Promise((resolve, reject) => {
       const qs = `INSERT INTO bookmark SET ?`;
       db.query(qs, body, (err, data) => {
@@ -30,7 +28,6 @@ module.exports = {
 
   getBookmarks: (id_users) => {
     return new Promise((resolve, reject) => {
-      const qs = `SELECT `
         const queryStr = `SELECT br.id, r.id_recipe, r.recipe_img, r.recipe_desc, r.recipe_ingredients FROM bookmark AS br JOIN recipes AS r ON br.id_recipe = r.id_recipe WHERE br.id_user = ?`;
         db.query(queryStr, id_users, (err, data) => {
           if (!err) {

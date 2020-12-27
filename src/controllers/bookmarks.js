@@ -37,7 +37,6 @@ module.exports = {
           res.status(404).json({
             msg: "Bookmark not found",
           });
-          // res.status(200).json(data);
         } else {
           res.status(200).json({
             msg: `Bookmark deleted`,
