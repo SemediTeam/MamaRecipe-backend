@@ -11,7 +11,7 @@ module.exports = {
       db.query(queryString, body, (err, data) => {
         if (!err) {
           // if (body.id_user === ) {
-            
+
           // }
           resolve(data);
         } else {
@@ -26,6 +26,18 @@ module.exports = {
       const queryString =
         "SELECT a.recipe_name, a.recipe_img FROM recipes as a JOIN likes as s ON s.id_recipe=a.id_recipe WHERE s.id_user=?";
       db.query(queryString, id, (err, data) => {
+        if (!err) {
+          resolve(data);
+        } else {
+          reject(err);
+        }
+      });
+    });
+  },
+  deleteLikeRecipe: (id_user, id_recipe) => {
+    return new Promise((resolve, reject) => {
+      const queryString = `DELETE FROM likes WHERE id_user = ? AND id_recipe = ?`;
+      db.query(queryString, [id_user, id_recipe], (err, data) => {
         if (!err) {
           resolve(data);
         } else {
