@@ -75,6 +75,18 @@ module.exports = {
       });
   },
 
+  getAllRecipeByUser: (req, res) => {
+    const id_users = req.decodedToken.id_user;
+    recipesModel.getAllRecipeByUser(id_users)
+    .then((data) => {
+        res.status(200).json(data)
+    })
+    .catch((err) => {
+      res.status(500).json(err)
+
+    })
+  },
+
   deleteRecipes: (req, res) => {
     const { id } = req.params;
     recipesModel

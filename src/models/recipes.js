@@ -40,6 +40,30 @@ module.exports = {
       });
     });
   },
+
+  getAllRecipeByUser : (id_users) =>  {
+    return new Promise((resolve, reject) => {
+      const qs = `SELECT id_recipe, recipe_name, recipe_img FROM recipes WHERE id_user = ?`
+      
+      db.query(qs, id_users, (err, data) => {
+        if (!err) {
+          if(data.length) {
+            resolve({
+              msg: `recipe by user ${id_users}`,
+              data,
+            })
+          }else{
+            reject({
+              msg: `recipe by user ${id_users}: Not Found`
+            })
+          }
+        } else {
+          reject(err)
+        }
+      })
+    })
+  },
+
   deleteRecipes: (params) => {
     return new Promise((resolve, reject) => {
       const queryString = "DELETE FROM recipes WHERE id_recipe = ?";
@@ -52,6 +76,7 @@ module.exports = {
       });
     });
   },
+
   updateRecipes: (req, params) => {
     return new Promise((resolve, reject) => {
       const queryString = "UPDATE recipes SET ? WHERE id_recipe = " + params;

@@ -10,6 +10,9 @@ module.exports = {
       const queryString = `INSERT INTO likes SET ?`;
       db.query(queryString, body, (err, data) => {
         if (!err) {
+          // if (body.id_user === ) {
+            
+          // }
           resolve(data);
         } else {
           reject(err);
