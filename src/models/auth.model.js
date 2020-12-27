@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const db = require("../config/mySQL");
+const sendEmail = require("../helpers/middlewares/sendEmail");
 
 module.exports = {
   postNewUser: (body) => {
@@ -37,7 +38,23 @@ module.exports = {
           const qs = "INSERT INTO users SET ?";
           db.query(qs, newBody, (err, data) => {
             if (!err) {
-              resolve(data);
+              const payload = {
+                email: body.email,
+              };
+              const token = jwt.sign(payload, process.env.SECRET_KEY, {
+                expiresIn: Math.floor(Date.now() / 1000) + 60 * 60,
+              });
+
+              resolve(
+                sendEmail({
+                  to: body.email,
+                  subject: "Verify Account Mama Recipe",
+                  html: `<h4>Verify Email</h4>
+                           <p>Thanks for registering!</p>
+                           <p>Please click the below link to verify your email address:</p>
+                <p><a href="${process.env.LOCAL}/auth/verify/${token}">${process.env.LOCAL}/auth/verify/${token}</a></p>`,
+                })
+              );
             } else {
               reject(err);
             }
@@ -55,60 +72,97 @@ module.exports = {
       //     msg: "Please enter the required fields",
       //   });
       // }
-      const qs = "SELECT id_user, password FROM users WHERE email = ?";
+      const qs =
+        "SELECT id_user, email, name, isVerified, password FROM users WHERE email = ?";
       db.query(qs, email, (err, data) => {
-        if (err) {
-          reject(
-            "Error SQL"
-            //   {
-            //   msg: "Error SQL",
-            //   status: 500,
-            //   err,
-            // }
-          );
-        }
-        if (!data[0]) {
-          reject(
-            "User Not Found"
-            //   {
-            //   msg: "User Not Found",
-            //   status: 404,
-            // }
-          );
+        if (!err) {
+          if (data[0]) {
+            bcrypt.compare(password, data[0].password, (err, result) => {
+              if (!err) {
+                if (!result) {
+                  reject("Wrong Password");
+                } else {
+                  if (data[0].isVerified !== 0) {
+                    const payload = {
+                      id_user: data[0].id_user,
+                      name: data[0].name,
+                    };
+                    const token = jwt.sign(payload, process.env.SECRET_KEY);
+                    resolve({
+                      email: email,
+                      id_user: data[0].id_user,
+                      name: data[0].name,
+                      tokenId: token,
+                    });
+                  } else {
+                    reject("Please verify your account first!");
+                  }
+                }
+              } else {
+                reject("Hash Error");
+              }
+            });
+          } else {
+            reject("User Not Found!");
+          }
         } else {
-          bcrypt.compare(password, data[0].password, (err, result) => {
-            if (err) {
-              reject(
-                "Hash Error"
-                //   {
-                //   msg: "Hash Error",
-                //   status: 500,
-                // }
-              );
-            }
-            if (!result) {
-              reject(
-                "Wrong Password"
-                //   {
-                //   msg: "Wrong Password",
-                //   status: 401,
-                // }
-              );
-            } else {
-              const payload = {
-                id_user: data[0].id_user,
-                name: data[0].name,
-                email: data[0].email,
-              };
-              const secret = process.env.SECRET_KEY;
-              const token = jwt.sign(payload, secret, { expiresIn: "24h" });
-              resolve({ token });
-            }
-          });
+          reject("Error Occured");
         }
       });
     });
   },
+  //       if (err) {
+  //         reject(
+  //           "Error SQL"
+  //           //   {
+  //           //   msg: "Error SQL",
+  //           //   status: 500,
+  //           //   err,
+  //           // }
+  //         );
+  //       }
+  //       if (!data[0]) {
+  //         reject(
+  //           "User Not Found"
+  //           //   {
+  //           //   msg: "User Not Found",
+  //           //   status: 404,
+  //           // }
+  //         );
+  //       } else {
+  //         bcrypt.compare(password, data[0].password, (err, result) => {
+  //           if (err) {
+  //             reject(
+  //               "Hash Error"
+  //               //   {
+  //               //   msg: "Hash Error",
+  //               //   status: 500,
+  //               // }
+  //             );
+  //           }
+  //           if (!result) {
+  //             reject(
+  //               "Wrong Password"
+  //               //   {
+  //               //   msg: "Wrong Password",
+  //               //   status: 401,
+  //               // }
+  //             );
+  //           } else {
+  //             const payload = {
+  //               id_user: data[0].id_user,
+  //               name: data[0].name,
+  //               email: data[0].email,
+  //             };
+  //             const secret = process.env.SECRET_KEY;
+  //             const token = jwt.sign(payload, secret, { expiresIn: "24h" });
+  //             resolve({ token });
+  //           }
+  //         });
+  //       }
+  //     });
+  //   });
+  // },
 
   postLogout: (blacklistToken) => {
     return new Promise((resolve, reject) => {
@@ -128,6 +182,21 @@ module.exports = {
             //   msg: "Logout Failed",
             // }
           );
+        }
+      });
+    });
+  },
+
+  verify: (tokenId) => {
+    const decodedToken = jwt.verify(tokenId, process.env.SECRET_KEY);
+    const email = decodedToken.email;
+    return new Promise((resolve, reject) => {
+      const qs = `UPDATE users SET isVerified = 1 WHERE email = ?`;
+      db.query(qs, email, (err, data) => {
+        if (!err) {
+          resolve(data);
+        } else {
+          reject(err);
         }
       });
     });
