@@ -241,29 +241,39 @@ module.exports = {
       });
     });
   },
-
-  //       if (!err) {
-  //         if (data[0]) {
-  //           const payload = {
-  //             email: data[0].email,
-  //           };
-  //           const tokenForgot = jwt.sign(payload, process.env.SECRET_KEY, {
-  //             expiresIn: 1000 * 60 * 15,
-  //           });
-  //           resolve({
-  //             status: 200,
-  //             email: email,
-  //             message: `${process.env.HOSTNAME}/auth/reset/${tokenForgot}`,
-  //           });
-  //         } else {
-  //           reject("Email Not Found");
-  //         }
-  //       } else {
-  //         reject("Error Occured");
-  //       }
-  //     });
-  //   });
-  // },
-
- 
+  sendOtp: (body) => {
+    return new Promise((resolve, reject) => {
+      if (body.otp == 0) {
+        return reject({
+          msg: "input otp",
+        });
+      }
+      const { otp } = body;
+      const queryString = "SELECT otp FROM otp WHERE otp = ?";
+      db.query(queryString, otp, (err, data) => {
+        console.log(queryString);
+        if (err) {
+          reject({
+            msg: "Error WOI",
+            status: 500,
+            err,
+          });
+        }
+        console.log(data);
+        if (data == undefined) {
+          return reject({
+            msg: "Error",
+          });
+        }
+        if (!data[0]) {
+          reject({
+            msg: "OTP not found",
+            status: 404,
+          });
+        } else {
+          resolve(data);
+        }
+      });
+    });
+  },
 };
