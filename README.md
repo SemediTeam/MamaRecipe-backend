@@ -70,4 +70,4 @@ For more info visit [Postman]()
 
 ## License
 
-Distributed under the [MIT](https://github.com/SemediTeam/recipedia-backend/LICENSE) License.
+Distributed under the [MIT](https://github.com/SemediTeam/recipedia-backend/blob/main/LICENSE) License.
