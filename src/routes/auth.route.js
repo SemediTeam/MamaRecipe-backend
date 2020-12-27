@@ -11,7 +11,7 @@ authRouter.post(
 authRouter.post("/login", authController.login);
 authRouter.post("/logout", verifyAccess.isLogin, authController.logout);
 // authRouter.post("/forgot", authController.forgot);
-// authRouter.get("/verify/", authController.verify);
+authRouter.get("/verify/:tokenId", authController.verify);
 // authRouter.patch("/reset/", authController.reset);
 
 module.exports = authRouter;

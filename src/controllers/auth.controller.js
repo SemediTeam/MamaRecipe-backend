@@ -1,6 +1,5 @@
 const authModel = require("../models/auth.model");
 const form = require("../helpers/form.helper");
-// const sendEmail = require("../helpers/middlewares/sendEmail");
 
 module.exports = {
   register: (req, res) => {
@@ -10,7 +9,7 @@ module.exports = {
       .then(() => {
         form.success(
           res,
-          "Registration Success",
+          "Registration Success, Please Check Your Email to Activated Your Account",
           { name: body.name, email: body.email },
           200
         );
@@ -25,7 +24,7 @@ module.exports = {
     authModel
       .postLogin(body)
       .then((auth) => {
-        form.success(res, "Login Success", { email: body.email, auth }, 200);
+        form.success(res, "Login Success", auth, 200);
       })
       .catch((info) => {
         form.error(res, "Login Failed", info, 400);
@@ -35,7 +34,7 @@ module.exports = {
   logout: (req, res) => {
     const bearerToken = req.header("x-access-token");
     if (!bearerToken) {
-      form.error(res, "Token Null", err, 400);
+      form.error(res, "Token Null", "err", 400);
     } else {
       blacklistToken = {
         token: bearerToken.split(" ")[1],
@@ -50,5 +49,49 @@ module.exports = {
           form.error(res, "Logout Failed", err, 400);
         });
     }
+  },
+
+  verify: (req, res) => {
+    const { tokenId } = req.params;
+    if (tokenId) {
+      authModel
+        .verify(tokenId)
+        .then((data) => {
+          form.success(res, "Verify Account Success", data, 200);
+        })
+        .catch((err) => {
+          form.error(res, "Verify Account Error", err, 500);
+        });
+    } else {
+      form.error(res, "Token Null", "err", 500);
+    }
+  },
+
+  forgot: (req, res) => {
+    const { body } = req;
+    authModel
+      .forgot(body)
+      .then((data) => {
+        form.success(res, "Successfully Send Link Reset Password", data, 200);
+      })
+      .catch((err) => {
+        form.error(res, "Error Send Link Reset Password", err, 500);
+      });
+  },
+
+  reset: (req, res) => {
+    let { body } = req;
+    body = {
+      ...body,
+      token: req.params.tokenId,
+    };
+    authModel
+      .reset(body)
+      .then((data) => {
+        form.success(res, "Successfully Change Password", data, 200);
+      })
+      .catch((err) => {
+        form.error(res, "Error Change Password", err, 500);
+      });
   },
 };
