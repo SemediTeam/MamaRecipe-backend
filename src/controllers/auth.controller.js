@@ -1,5 +1,10 @@
 const authModel = require("../models/auth.model");
 const form = require("../helpers/form.helper");
+const db = require("../config/mySQL");
+
+async function deleteOtp(otp) {
+  await db.query("DELETE FROM otp WHERE otp = ?", otp);
+}
 
 module.exports = {
   register: (req, res) => {
@@ -90,11 +95,21 @@ module.exports = {
       .reset(req.body)
       .then((data) => {
         form.success(res, "Successfully Change Password", data, 200);
+      }).catch((err) => {
+        form.error(res, "Error Send Link Reset Password", err, 500);
+      })
+    },
+  
+  sendOtp: (req, res) => {
+    const { body } = req;
+    authModel
+      .sendOtp(body)
+      .then(async (data) => {
+        await deleteOtp(data[0].otp);
+        form.success(res, "Successfully Input OTP", data, 200);
       })
       .catch((err) => {
-        form.error(res, "Error Change Password", err, 500);
+        form.error(res, "Error Input OTP", err, 500);
       });
   },
-
-  
 };

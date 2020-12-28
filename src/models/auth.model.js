@@ -81,7 +81,7 @@ module.exports = {
       //   });
       // }
       const qs =
-        "SELECT id_user, email, name, isVerified, password FROM users WHERE email = ?";
+        "SELECT id_user, email, name, user_img, isVerified, password FROM users WHERE email = ?";
       db.query(qs, email, (err, data) => {
         if (!err) {
           if (data[0]) {
@@ -97,9 +97,10 @@ module.exports = {
                     };
                     const token = jwt.sign(payload, process.env.SECRET_KEY);
                     resolve({
-                      email: email,
                       id_user: data[0].id_user,
                       name: data[0].name,
+                      email: email,
+                      user_img: data[0].user_img,
                       tokenId: token,
                     });
                   } else {
@@ -302,4 +303,27 @@ module.exports = {
   // },
 
  
+  sendOtp: (body) => {
+    return new Promise((resolve, reject) => {
+      if (body.otp == 0) {
+        return reject("Please Input OTP");
+      }
+      const { otp } = body;
+      const qs = "SELECT otp FROM otp WHERE otp = ?";
+      db.query(qs, otp, (err, data) => {
+        if (err) {
+          reject("Error Occured");
+        }
+        console.log(data);
+        if (data == undefined) {
+          return reject("Error Occured");
+        }
+        if (!data[0]) {
+          reject("Wrong OTP");
+        } else {
+          resolve(data);
+        }
+      });
+    });
+  },
 };
