@@ -12,7 +12,7 @@ authRouter.post("/login", authController.login);
 authRouter.post("/logout", verifyAccess.isLogin, authController.logout);
 authRouter.get("/verify/:tokenId", authController.verify);
 authRouter.post("/forgot", authController.forgot);
-authRouter.post("/otp", authController.sendOtp);
-// authRouter.patch("/reset/", authController.reset);
+// authRouter.post("/otp", authController.otp);
+authRouter.patch("/reset", authController.reset);
 
 module.exports = authRouter;
