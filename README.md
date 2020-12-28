@@ -61,8 +61,8 @@ Open [http://localhost:8000/](http://localhost:8000/) to view it in the browser.
 | POST | /auth/login | Login User |
 | POST | /auth/logout | Logout User |
 | GET | /auth/verify | Activate User Account |
+| POST | /auth/forgot | Forgot Password User |
 | TBA | /auth/reset | Reset Password User |
-| TBA | /auth/forgot | Forgot Password User |
 
 ### Documentation
 
