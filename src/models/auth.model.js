@@ -260,7 +260,7 @@ module.exports = {
               const qs = "UPDATE users SET password = ? WHERE email = ?";
               db.query(qs, [hashedPassword, email], (err, data) => {
                 if (!err) {
-                  resolve("Success Update Password", data);
+                  resolve("Success", data);
                 } else {
                   reject(err);
                 }

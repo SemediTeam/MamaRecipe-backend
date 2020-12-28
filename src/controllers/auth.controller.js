@@ -94,10 +94,10 @@ module.exports = {
     authModel
       .reset(req.body)
       .then((data) => {
-        form.success(res, "Successfully Change Password", data, 200);
+        form.success(res, "Success Change Password", data, 200);
       })
       .catch((err) => {
-        form.error(res, "Error Send Link Reset Password", err, 500);
+        form.error(res, "Failed Change Password", err, 500);
       });
   },
 
