@@ -241,6 +241,43 @@ module.exports = {
     });
   },
 
+  reset: (body) => {
+    return new Promise((resolve, reject) => {
+      const saltRounds = 10;
+      const qs = "SELECT email FROM users WHERE email = ?";
+      db.query(qs, [body.email], (err, data) => {
+        if (data.length !== 0) {
+          bcrypt.genSalt(saltRounds, (err, salt) => {
+            if (err) {
+              reject(err)
+            }
+            const { password, email } = body;
+            bcrypt.hash(password, salt, (err, hashedPassword) => {
+              if (err) {
+                reject(err)
+              }
+              const qs = "UPDATE users SET password = ? WHERE email = ?";
+              db.query(qs, [hashedPassword, email], (err, data) => {
+                if (!err) {
+                  resolve({
+                    msg: "You have successfully change password",
+                    data,
+                  })
+                } else {
+                  reject(err)
+                }
+              })
+            })
+          })
+        } else {
+          reject({
+            msg: "User not found",
+          })
+        }
+      })
+    })
+  },
+
   //       if (!err) {
   //         if (data[0]) {
   //           const payload = {

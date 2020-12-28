@@ -80,13 +80,14 @@ module.exports = {
   },
 
   reset: (req, res) => {
-    let { body } = req;
-    body = {
-      ...body,
-      token: req.params.tokenId,
-    };
+    // let { body } = req;
+    // body = {
+    //   ...body,
+    //   token: req.params.tokenId,
+    // };
+
     authModel
-      .reset(body)
+      .reset(req.body)
       .then((data) => {
         form.success(res, "Successfully Change Password", data, 200);
       })
