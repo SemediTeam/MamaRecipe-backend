@@ -84,8 +84,8 @@ Open [http://localhost:8000/](http://localhost:8000/) to view it in the browser.
 
 ### Documentation
 
-For more info visit [Postman]()
-
+For more info visit [Postman 1](https://documenter.getpostman.com/view/13522642/TVsuCSZz)
+                    [Postman 2](https://documenter.getpostman.com/view/13520286/TVsxB6ht)
 ## License
 
 Distributed under the [MIT](https://github.com/SemediTeam/recipedia-backend/blob/main/LICENSE) License.
