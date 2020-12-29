@@ -220,7 +220,7 @@ module.exports = {
         if (err) {
           reject(err);
         }
-        if (data.length !== 0) {
+        if (data[0] !== 0) {
           let otp = Math.floor(100000 + Math.random() * 900000);
           insertOtp(otp);
 
@@ -250,25 +250,25 @@ module.exports = {
         if (data.length !== 0) {
           bcrypt.genSalt(saltRounds, (err, salt) => {
             if (err) {
-              reject(err);
+              reject("err");
             }
             const { password, email } = body;
             bcrypt.hash(password, salt, (err, hashedPassword) => {
               if (err) {
-                reject(err);
-              }
+                reject("Please Input New Password");
+              } 
               const qs = "UPDATE users SET password = ? WHERE email = ?";
               db.query(qs, [hashedPassword, email], (err, data) => {
-                if (!err) {
+                if (data !== 0) {
                   resolve("Success", data);
                 } else {
-                  reject(err);
+                  reject("Encountered Error", err);
                 }
               });
             });
           });
         } else {
-          reject("User Not Found");
+          reject("Either User Not Found or Error Occured");
         }
       });
     });
