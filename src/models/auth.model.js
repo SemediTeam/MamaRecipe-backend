@@ -81,7 +81,7 @@ module.exports = {
       //   });
       // }
       const qs =
-        "SELECT id_user, email, name, isVerified, password FROM users WHERE email = ?";
+        "SELECT id_user, email, name, user_img, isVerified, password FROM users WHERE email = ?";
       db.query(qs, email, (err, data) => {
         if (!err) {
           if (data[0]) {
@@ -97,9 +97,10 @@ module.exports = {
                     };
                     const token = jwt.sign(payload, process.env.SECRET_KEY);
                     resolve({
-                      email: email,
                       id_user: data[0].id_user,
                       name: data[0].name,
+                      email: email,
+                      user_img: data[0].user_img,
                       tokenId: token,
                     });
                   } else {
@@ -219,7 +220,7 @@ module.exports = {
         if (err) {
           reject(err);
         }
-        if (data.length !== 0) {
+        if (data[0] !== 0) {
           let otp = Math.floor(100000 + Math.random() * 900000);
           insertOtp(otp);
 
@@ -241,6 +242,38 @@ module.exports = {
     });
   },
 
+  reset: (body) => {
+    return new Promise((resolve, reject) => {
+      const saltRounds = 10;
+      const qs = "SELECT email FROM users WHERE email = ?";
+      db.query(qs, [body.email], (err, data) => {
+        if (data.length !== 0) {
+          bcrypt.genSalt(saltRounds, (err, salt) => {
+            if (err) {
+              reject("err");
+            }
+            const { password, email } = body;
+            bcrypt.hash(password, salt, (err, hashedPassword) => {
+              if (err) {
+                reject("Please Input New Password");
+              } 
+              const qs = "UPDATE users SET password = ? WHERE email = ?";
+              db.query(qs, [hashedPassword, email], (err, data) => {
+                if (data !== 0) {
+                  resolve("Success", data);
+                } else {
+                  reject("Encountered Error", err);
+                }
+              });
+            });
+          });
+        } else {
+          reject("Either User Not Found or Error Occured");
+        }
+      });
+    });
+  },
+
   //       if (!err) {
   //         if (data[0]) {
   //           const payload = {
@@ -249,11 +282,7 @@ module.exports = {
   //           const tokenForgot = jwt.sign(payload, process.env.SECRET_KEY, {
   //             expiresIn: 1000 * 60 * 15,
   //           });
-  //           resolve({
-  //             status: 200,
-  //             email: email,
-  //             message: `${process.env.HOSTNAME}/auth/reset/${tokenForgot}`,
-  //           });
+  //           resolve(`${process.env.LOCAL}/auth/reset/${tokenForgot}`);
   //         } else {
   //           reject("Email Not Found");
   //         }
@@ -264,5 +293,27 @@ module.exports = {
   //   });
   // },
 
- 
+  sendOtp: (body) => {
+    return new Promise((resolve, reject) => {
+      if (body.otp == 0) {
+        return reject("Please Input OTP");
+      }
+      const { otp } = body;
+      const qs = "SELECT otp FROM otp WHERE otp = ?";
+      db.query(qs, otp, (err, data) => {
+        if (err) {
+          reject("Error Occured");
+        }
+        console.log(data);
+        if (data == undefined) {
+          return reject("Error Occured");
+        }
+        if (!data[0]) {
+          reject("Wrong OTP");
+        } else {
+          resolve(data);
+        }
+      });
+    });
+  },
 };

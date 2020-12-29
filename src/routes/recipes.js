@@ -7,6 +7,7 @@ const checkToken = require("../helpers/middlewares/verifyAccess");
 recipesRouter.get("/", recipesController.getAllRecipe);
 recipesRouter.get("/new", recipesController.getAllRecipesNew);
 recipesRouter.get("/popular", recipesController.getAllRecipesPopular);
+recipesRouter.get("/byuser", checkToken.isLogin, recipesController.getAllRecipeByUser)
 recipesRouter.get("/:id", recipesController.getSingleRecipe);
 recipesRouter.post(
   "/",

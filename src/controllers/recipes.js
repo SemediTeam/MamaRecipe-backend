@@ -8,13 +8,13 @@ module.exports = {
     const user_id = req.decodedToken.id_user;
     const filePathImages = JSON.stringify(
       req.files.images.map(
-        (e) => "http://localhost:6000" + "/images" + "/" + e.filename + " "
+        (e) => `http://localhost:${process.env.PORT}` + "/images" + "/" + e.filename + " "
       )
     );
 
     const filePathVideo = JSON.stringify(
       req.files.videos.map(
-        (e) => "http://localhost:6000" + "/videos" + "/" + e.filename + " "
+        (e) => `http://localhost:${process.env.PORT}` + "/videos" + "/" + e.filename + " "
       )
     );
     const insertBody = {
@@ -75,6 +75,18 @@ module.exports = {
       });
   },
 
+  getAllRecipeByUser: (req, res) => {
+    const id_users = req.decodedToken.id_user;
+    recipesModel.getAllRecipeByUser(id_users)
+    .then((data) => {
+        res.status(200).json(data)
+    })
+    .catch((err) => {
+      res.status(500).json(err)
+
+    })
+  },
+
   deleteRecipes: (req, res) => {
     const { id } = req.params;
     recipesModel
@@ -100,13 +112,13 @@ module.exports = {
 
     const filePathImages = JSON.stringify(
       req.files.images.map(
-        (e) => "http://localhost:6000" + "/images" + "/" + e.filename + " "
+        (e) => `http://localhost:${process.env.PORT}` + "/images" + "/" + e.filename + " "
       )
     );
 
     const filePathVideo = JSON.stringify(
       req.files.videos.map(
-        (e) => "http://localhost:6000" + "/videos" + "/" + e.filename + " "
+        (e) => `http://localhost:${process.env.PORT}` + "/videos" + "/" + e.filename + " "
       )
     );
     const insertBody = {
