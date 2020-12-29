@@ -63,7 +63,24 @@ Open [http://localhost:8000/](http://localhost:8000/) to view it in the browser.
 | GET | /auth/verify | Activate User Account |
 | POST | /auth/forgot | Forgot Password User |
 | POST | /auth/otp | Verif OTP Forgot Password |
-| TBA | /auth/reset | Reset Password User |
+| PATCH | /auth/reset | Reset Password User |
+| GET | /recipe | Get All Recipes |
+| GET | /recipe/new | Get All Recipe By New |
+| GET | /recipe/popular | Get All Recipe By Popular |
+| GET | /recipe/:id | Get Single Recipe By Id |
+| GET | /recipe/byuser | Get Single Recipe By Id User |
+| POST | /recipe | Add New Recipe |
+| PATCH | /recipe/:id | Update Recipe |
+| DELETE | /recipe/:id | Delete Recipe |
+| SEARCH | /search?recipe_name= | Search Recipe By Recipe Name |
+| GET | /comments/:id | Get Comments By Id Recipe |
+| POST | /comments | Get Comments |
+| POST | /likes | Add Likes Recipe |
+| GET | /likes | Get Likes Recipe |
+| DELETE | /likes/:id | Delete / Unlikes Recipe |
+| POST | /bookmarks | Add Bookmars Recipe |
+| GET | /bookmarks | Get Bookmarks Recipe |
+| DELETE | /bookmarks/:id | Delete Bookmarks Recipe |
 
 ### Documentation
 

@@ -220,7 +220,7 @@ module.exports = {
         if (err) {
           reject(err);
         }
-        if (data.length !== 0) {
+        if (data[0] !== 0) {
           let otp = Math.floor(100000 + Math.random() * 900000);
           insertOtp(otp);
 
@@ -250,33 +250,28 @@ module.exports = {
         if (data.length !== 0) {
           bcrypt.genSalt(saltRounds, (err, salt) => {
             if (err) {
-              reject(err)
+              reject("err");
             }
             const { password, email } = body;
             bcrypt.hash(password, salt, (err, hashedPassword) => {
               if (err) {
-                reject(err)
-              }
+                reject("Please Input New Password");
+              } 
               const qs = "UPDATE users SET password = ? WHERE email = ?";
               db.query(qs, [hashedPassword, email], (err, data) => {
-                if (!err) {
-                  resolve({
-                    msg: "You have successfully change password",
-                    data,
-                  })
+                if (data !== 0) {
+                  resolve("Success", data);
                 } else {
-                  reject(err)
+                  reject("Encountered Error", err);
                 }
-              })
-            })
-          })
+              });
+            });
+          });
         } else {
-          reject({
-            msg: "User not found",
-          })
+          reject("Either User Not Found or Error Occured");
         }
-      })
-    })
+      });
+    });
   },
 
   //       if (!err) {
@@ -287,11 +282,7 @@ module.exports = {
   //           const tokenForgot = jwt.sign(payload, process.env.SECRET_KEY, {
   //             expiresIn: 1000 * 60 * 15,
   //           });
-  //           resolve({
-  //             status: 200,
-  //             email: email,
-  //             message: `${process.env.HOSTNAME}/auth/reset/${tokenForgot}`,
-  //           });
+  //           resolve(`${process.env.LOCAL}/auth/reset/${tokenForgot}`);
   //         } else {
   //           reject("Email Not Found");
   //         }
@@ -302,7 +293,6 @@ module.exports = {
   //   });
   // },
 
- 
   sendOtp: (body) => {
     return new Promise((resolve, reject) => {
       if (body.otp == 0) {
