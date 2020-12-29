@@ -10,9 +10,6 @@ module.exports = {
       const queryString = `INSERT INTO likes SET ?`;
       db.query(queryString, body, (err, data) => {
         if (!err) {
-          // if (body.id_user === ) {
-
-          // }
           resolve(data);
         } else {
           reject(err);
@@ -20,16 +17,30 @@ module.exports = {
       });
     });
   },
-  getRecipeLike: (req) => {
-    const { id } = req.params;
+  getRecipeLike: (id_users) => {
     return new Promise((resolve, reject) => {
-      const queryString =
-        "SELECT a.recipe_name, a.recipe_img FROM recipes as a JOIN likes as s ON s.id_recipe=a.id_recipe WHERE s.id_user=?";
-      db.query(queryString, id, (err, data) => {
+      const queryString = `SELECT br.id, r.id_recipe, r.recipe_name, r.recipe_img, r.recipe_desc, r.recipe_ingredients FROM likes AS br JOIN recipes AS r ON br.id_recipe = r.id_recipe WHERE br.id_user = ?`;
+      db.query(queryString, id_users, (err, data) => {
         if (!err) {
-          resolve(data);
+          if (data.length) {
+            resolve({
+              status: 200,
+              message: `Like`,
+              data: data,
+            });
+          } else {
+            reject({
+              status: 404,
+              message: `Kamu belum memberi like`,
+              data: `Data not Found`,
+            });
+          }
         } else {
-          reject(err);
+          reject({
+            status: 500,
+            message: `Encountered error`,
+            details: err,
+          });
         }
       });
     });
