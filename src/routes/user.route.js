@@ -5,7 +5,7 @@ const userController = require("../controllers/user.controller");
 const uploadImg = require("../helpers/middlewares/upload");
 const verifyAccess = require("../helpers/middlewares/verifyAccess");
 
-userRouter.get("/:id", verifyAccess.isLogin, userController.getUserById);
+userRouter.get("/:id", userController.getUserById);
 userRouter.patch("/:id", verifyAccess.isLogin, userController.updateUser);
 userRouter.patch("/img/:id", uploadImg.singleUpload, verifyAccess.isLogin, userController.updateUser);
 
