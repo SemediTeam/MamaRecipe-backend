@@ -63,7 +63,7 @@ Open [http://localhost:8000/](http://localhost:8000/) to view it in the browser.
 | GET | /auth/verify | Activate User Account |
 | POST | /auth/forgot | Forgot Password User |
 | POST | /auth/otp | Verif OTP Forgot Password |
-| TBA | /auth/reset | Reset Password User |
+| PATCH | /auth/reset | Reset Password User |
 
 ### Documentation
 
