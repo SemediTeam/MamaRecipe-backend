@@ -84,7 +84,7 @@ Open [http://localhost:8000/](http://localhost:8000/) to view it in the browser.
 
 ### Documentation
 
-For more info visit [Postman]()
+For more info visit [Postman](https://documenter.getpostman.com/view/13522642/TVsuCSZz)
 
 ## License
 
