@@ -65,10 +65,10 @@ module.exports = {
           form.success(res, "Verify Account Success", data, 200);
         })
         .catch((err) => {
-          form.error(res, "Verify Account Error", err, 500);
+          form.error(res, "Verify Account Error", err, 400);
         });
     } else {
-      form.error(res, "Token Null", "err", 500);
+      form.error(res, "Token Null", "err", 400);
     }
   },
 
@@ -80,7 +80,7 @@ module.exports = {
         form.success(res, "Successfully Send Link Reset Password", data, 200);
       })
       .catch((err) => {
-        form.error(res, "Error Send Link Reset Password", err, 500);
+        form.error(res, "Error Send Link Reset Password", err, 400);
       });
   },
 
@@ -97,7 +97,7 @@ module.exports = {
         form.success(res, "Success Change Password", data, 200);
       })
       .catch((err) => {
-        form.error(res, "Failed Change Password", err, 500);
+        form.error(res, "Failed Change Password", err, 400);
       });
   },
 
@@ -110,7 +110,7 @@ module.exports = {
         form.success(res, "Success Input OTP", data, 200);
       })
       .catch((err) => {
-        form.error(res, "Error Input OTP", err, 500);
+        form.error(res, "Error Input OTP", err, 400);
       });
   },
 };
