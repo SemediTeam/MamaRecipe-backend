@@ -18,18 +18,11 @@ module.exports = {
       });
   },
   getLikeRecipe: (req, res) => {
+    const id_users = req.decodedToken.id_user;
     likesModels
-      .getRecipeLike(req)
+      .getRecipeLike(id_users)
       .then((data) => {
-        if (data.length) {
-          res.status(200).json({
-            data,
-          });
-        } else {
-          res.status(404).json({
-            msg: "Data not found",
-          });
-        }
+        res.status(200).json(data);
       })
       .catch((err) => {
         res.status(500).json(err);
