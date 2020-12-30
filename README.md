@@ -12,7 +12,12 @@ API build in [Express.js](https://expressjs.com/) and [MySQL](https://www.mysql.
   ```sh
   npm install npm@latest -g
   ```
+### Schema Database
 
+<div align="center">
+    <img width="100%" src="https://github.com/bayue48/recipedia-frontend/blob/main/public/Untitled%20Diagram.jpg">
+ </div>
+ 
 ### Installation
 
 1. Clone the repo
@@ -51,7 +56,7 @@ EPASS = "YOUR_EMAIL_PASS"
 `node index` OR `nodemon start` OR `npm start`
 
 Runs the app in the development mode.<br>
-Open [http://localhost:8000/](http://localhost:8000/) to view it in the browser.
+Open [http://localhost:4000/](http://localhost:4000/) to view it in the browser.
 
 ### Endpoint
 
