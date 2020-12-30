@@ -15,7 +15,7 @@ API build in [Express.js](https://expressjs.com/) and [MySQL](https://www.mysql.
 ### Schema Database
 
 <div align="center">
-    <img width="100%" src="https://github.com/bayue48/recipedia-frontend/blob/main/public/Untitled%20Diagram.jpg">
+    <img width="100%" src="./Untitled%20Diagram.jpg">
  </div>
  
 ### Installation
