@@ -112,13 +112,13 @@ module.exports = {
 
     const filePathImages = JSON.stringify(
       req.files.images.map(
-        (e) => `http://localhost:${process.env.PORT}` + "/images" + "/" + e.filename + " "
+        (e) => `${process.env.LOCAL}` + "/images" + "/" + e.filename + " "
       )
     );
 
     const filePathVideo = JSON.stringify(
       req.files.videos.map(
-        (e) => `http://localhost:${process.env.PORT}` + "/videos" + "/" + e.filename + " "
+        (e) => `${process.env.LOCAL}` + "/videos" + "/" + e.filename + " "
       )
     );
     const insertBody = {
