@@ -1,4 +1,4 @@
-# recipedia-backend
+# MamaRecipe-backend
 
 Simple, easy implementation of the private web API.
 
