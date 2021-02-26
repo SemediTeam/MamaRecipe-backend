@@ -57,10 +57,317 @@ module.exports = {
                 sendEmail({
                   to: body.email,
                   subject: "Verify Account - Mama Recipe",
-                  html: `<h4>Verify Email</h4>
-                           <p>Thanks for registering!</p>
-                           <p>Please click the below link to verify your email address:</p>
-                <p><a href="${process.env.LOCAL}/auth/verify/${token}">${process.env.LOCAL}/auth/verify/${token}</a></p>`,
+                  html: `<html>
+                  <head>
+                    <title></title>
+                    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                    <meta name="viewport" content="width=device-width, initial-scale=1" />
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                    <style type="text/css">
+                      /* FONTS */
+                      @media screen {
+                        @font-face {
+                          font-family: "Lato";
+                          font-style: normal;
+                          font-weight: 400;
+                          src: local("Lato Regular"), local("Lato-Regular"),
+                            url(https://fonts.gstatic.com/s/lato/v11/qIIYRU-oROkIk8vfvxw6QvesZW2xOQ-xsNqO47m55DA.woff)
+                              format("woff");
+                        }
+                
+                        @font-face {
+                          font-family: "Lato";
+                          font-style: normal;
+                          font-weight: 700;
+                          src: local("Lato Bold"), local("Lato-Bold"),
+                            url(https://fonts.gstatic.com/s/lato/v11/qdgUG4U09HnJwhYI-uK18wLUuEpTyoUstqEm5AMlJo4.woff)
+                              format("woff");
+                        }
+                
+                        @font-face {
+                          font-family: "Lato";
+                          font-style: italic;
+                          font-weight: 400;
+                          src: local("Lato Italic"), local("Lato-Italic"),
+                            url(https://fonts.gstatic.com/s/lato/v11/RYyZNoeFgb0l7W3Vu1aSWOvvDin1pK8aKteLpeZ5c0A.woff)
+                              format("woff");
+                        }
+                
+                        @font-face {
+                          font-family: "Lato";
+                          font-style: italic;
+                          font-weight: 700;
+                          src: local("Lato Bold Italic"), local("Lato-BoldItalic"),
+                            url(https://fonts.gstatic.com/s/lato/v11/HkF_qI1x_noxlxhrhMQYELO3LdcAZYWl9Si6vvxL-qU.woff)
+                              format("woff");
+                        }
+                      }
+                
+                      /* CLIENT-SPECIFIC STYLES */
+                      body,
+                      table,
+                      td,
+                      a {
+                        -webkit-text-size-adjust: 100%;
+                        -ms-text-size-adjust: 100%;
+                      }
+                      table,
+                      td {
+                        mso-table-lspace: 0pt;
+                        mso-table-rspace: 0pt;
+                      }
+                      img {
+                        -ms-interpolation-mode: bicubic;
+                      }
+                
+                      /* RESET STYLES */
+                      img {
+                        border: 0;
+                        height: auto;
+                        line-height: 100%;
+                        outline: none;
+                        text-decoration: none;
+                      }
+                      table {
+                        border-collapse: collapse !important;
+                      }
+                      body {
+                        height: 100% !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                        width: 100% !important;
+                      }
+                
+                      /* iOS BLUE LINKS */
+                      a[x-apple-data-detectors] {
+                        color: inherit !important;
+                        text-decoration: none !important;
+                        font-size: inherit !important;
+                        font-family: inherit !important;
+                        font-weight: inherit !important;
+                        line-height: inherit !important;
+                      }
+                
+                      /* ANDROID CENTER FIX */
+                      div[style*="margin: 16px 0;"] {
+                        margin: 0 !important;
+                      }
+                    </style>
+                  </head>
+                  <body
+                    style="
+                      background-color: #f4f4f4;
+                      margin: 0 !important;
+                      padding: 0 !important;
+                    "
+                  >
+                    <!-- HIDDEN PREHEADER TEXT -->
+                    <div
+                      style="
+                        display: none;
+                        font-size: 1px;
+                        color: #fefefe;
+                        line-height: 1px;
+                        font-family: 'Lato', Helvetica, Arial, sans-serif;
+                        max-height: 0px;
+                        max-width: 0px;
+                        opacity: 0;
+                        overflow: hidden;
+                      "
+                    >
+                      Looks like you tried signing in a few too many times. Let's see if we can
+                      get you back into your account.
+                    </div>
+                
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                      <!-- LOGO -->
+                      <tr>
+                        <td bgcolor="#f4f4f4" align="center">
+                          <table border="0" cellpadding="0" cellspacing="0" width="480">
+                            <tr>
+                              <td
+                                align="center"
+                                valign="top"
+                                style="padding: 40px 10px 40px 10px"
+                              >
+                                <img
+                                  alt="Logo"
+                                  src="https://i.ibb.co/P9Jd4Zy/logo192.png"
+                                  width="100"
+                                  height="100"
+                                  style="
+                                    display: block;
+                                    font-family: 'Lato', Helvetica, Arial, sans-serif;
+                                    color: #ffffff;
+                                    font-size: 18px;
+                                  "
+                                  border="0"
+                                />
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <!-- HERO -->
+                      <tr>
+                        <td bgcolor="#f4f4f4" align="center" style="padding: 0px 10px 0px 10px">
+                          <table border="0" cellpadding="0" cellspacing="0" width="480">
+                            <tr>
+                              <td
+                                bgcolor="#ffffff"
+                                align="center"
+                                valign="top"
+                                style="
+                                  padding: 40px 20px 20px 20px;
+                                  border-radius: 4px 4px 0px 0px;
+                                  color: #111111;
+                                  font-family: 'Lato', Helvetica, Arial, sans-serif;
+                                  font-size: 48px;
+                                  font-weight: 400;
+                                  letter-spacing: 4px;
+                                  line-height: 48px;
+                                "
+                              >
+                                <h1 style="font-size: 32px; font-weight: 400; margin: 0">
+                                  Welcome
+                                </h1>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <!-- COPY BLOCK -->
+                      <tr>
+                        <td bgcolor="#f4f4f4" align="center" style="padding: 0px 10px 0px 10px">
+                          <table border="0" cellpadding="0" cellspacing="0" width="480">
+                            <!-- COPY -->
+                            <tr>
+                              <td
+                                bgcolor="#ffffff"
+                                align="left"
+                                style="
+                                  padding: 20px 30px 40px 30px;
+                                  color: #666666;
+                                  font-family: 'Lato', Helvetica, Arial, sans-serif;
+                                  font-size: 18px;
+                                  font-weight: 400;
+                                  line-height: 25px;
+                                "
+                              >
+                                <p style="margin: 0">
+                                  Thank you for register to Mama Recipe. Please click the below link to verify your email address.
+                                </p>
+                              </td>
+                            </tr>
+                            <!-- BULLETPROOF BUTTON -->
+                            <tr>
+                              <td bgcolor="#ffffff" align="left">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                  <tr>
+                                    <td
+                                      bgcolor="#ffffff"
+                                      align="center"
+                                      style="padding: 20px 30px 60px 30px"
+                                    >
+                                      <table border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                          <td
+                                            align="center"
+                                            style="border-radius: 3px"
+                                            bgcolor="#DB3022"
+                                          >
+                                            <a
+                                              href="${process.env.LOCAL}/auth/verify/${token}"
+                                              style="
+                                                font-size: 20px;
+                                                font-family: Helvetica, Arial, sans-serif;
+                                                color: #ffffff;
+                                                text-decoration: none;
+                                                color: #ffffff;
+                                                text-decoration: none;
+                                                padding: 15px 25px;
+                                                border-radius: 2px;
+                                                border: 1px solid #efc81a
+                                                display: inline-block;
+                                              "
+                                              >Verify</a
+                                            >
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                
+                      <!-- COPY CALLOUT -->
+                      <tr>
+                        <td bgcolor="#f4f4f4" align="center" style="padding: 0px 10px 0px 10px">
+                          <table border="0" cellpadding="0" cellspacing="0" width="480">
+                            <!-- SUPPORT CALLOUT -->
+                            <tr>
+                              <td
+                                bgcolor="#f4f4f4"
+                                align="center"
+                                style="padding: 30px 10px 0px 10px"
+                              >
+                                <table border="0" cellpadding="0" cellspacing="0" width="480">
+                                  <!-- HEADLINE -->
+                                  <tr>
+                                    <td
+                                      bgcolor="#C6C2ED"
+                                      align="center"
+                                      style="
+                                        padding: 30px 30px 30px 30px;
+                                        border-radius: 4px 4px 4px 4px;
+                                        color: #666666;
+                                        font-family: 'Lato', Helvetica, Arial, sans-serif;
+                                        font-size: 18px;
+                                        font-weight: 400;
+                                        line-height: 25px;
+                                      "
+                                    >
+                                      <h2
+                                        style="
+                                          font-size: 20px;
+                                          font-weight: 400;
+                                          color: #111111;
+                                          margin: 0;
+                                        "
+                                      >
+                                        If you dit not register, please ignore this email.
+                                      </h2>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                            <!-- PERMISSION REMINDER -->
+                            <tr>
+                              <td
+                                bgcolor="#f4f4f4"
+                                align="left"
+                                style="
+                                  padding: 0px 30px 30px 30px;
+                                  color: #666666;
+                                  font-family: 'Lato', Helvetica, Arial, sans-serif;
+                                  font-size: 14px;
+                                  font-weight: 400;
+                                  line-height: 18px;
+                                "
+                              ></td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </body>
+                </html>
+                `,
                 })
               );
             } else {
@@ -227,12 +534,318 @@ module.exports = {
           resolve(
             sendEmail({
               to: body.email,
-              subject: "Reset Password Mama Recipe",
-              html: `<h4>Reset Password</h4>
-                     <p>Here Your OTP for Reset Password</p>
-                     <p style="font-weight: bold;">${otp}<p>
-                     <p>Please click the below link to reset your password</p>
-          <p><a href="${process.env.LOCAL}/auth/otp/">${process.env.LOCAL}/auth/otp/</a></p>`,
+              subject: "Reset Password - Mama Recipe",
+              html: `<html>
+              <head>
+                <title></title>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                <style type="text/css">
+                  /* FONTS */
+                  @media screen {
+                    @font-face {
+                      font-family: "Lato";
+                      font-style: normal;
+                      font-weight: 400;
+                      src: local("Lato Regular"), local("Lato-Regular"),
+                        url(https://fonts.gstatic.com/s/lato/v11/qIIYRU-oROkIk8vfvxw6QvesZW2xOQ-xsNqO47m55DA.woff)
+                          format("woff");
+                    }
+            
+                    @font-face {
+                      font-family: "Lato";
+                      font-style: normal;
+                      font-weight: 700;
+                      src: local("Lato Bold"), local("Lato-Bold"),
+                        url(https://fonts.gstatic.com/s/lato/v11/qdgUG4U09HnJwhYI-uK18wLUuEpTyoUstqEm5AMlJo4.woff)
+                          format("woff");
+                    }
+            
+                    @font-face {
+                      font-family: "Lato";
+                      font-style: italic;
+                      font-weight: 400;
+                      src: local("Lato Italic"), local("Lato-Italic"),
+                        url(https://fonts.gstatic.com/s/lato/v11/RYyZNoeFgb0l7W3Vu1aSWOvvDin1pK8aKteLpeZ5c0A.woff)
+                          format("woff");
+                    }
+            
+                    @font-face {
+                      font-family: "Lato";
+                      font-style: italic;
+                      font-weight: 700;
+                      src: local("Lato Bold Italic"), local("Lato-BoldItalic"),
+                        url(https://fonts.gstatic.com/s/lato/v11/HkF_qI1x_noxlxhrhMQYELO3LdcAZYWl9Si6vvxL-qU.woff)
+                          format("woff");
+                    }
+                  }
+            
+                  /* CLIENT-SPECIFIC STYLES */
+                  body,
+                  table,
+                  td,
+                  a {
+                    -webkit-text-size-adjust: 100%;
+                    -ms-text-size-adjust: 100%;
+                  }
+                  table,
+                  td {
+                    mso-table-lspace: 0pt;
+                    mso-table-rspace: 0pt;
+                  }
+                  img {
+                    -ms-interpolation-mode: bicubic;
+                  }
+            
+                  /* RESET STYLES */
+                  img {
+                    border: 0;
+                    height: auto;
+                    line-height: 100%;
+                    outline: none;
+                    text-decoration: none;
+                  }
+                  table {
+                    border-collapse: collapse !important;
+                  }
+                  body {
+                    height: 100% !important;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                    width: 100% !important;
+                  }
+            
+                  /* iOS BLUE LINKS */
+                  a[x-apple-data-detectors] {
+                    color: inherit !important;
+                    text-decoration: none !important;
+                    font-size: inherit !important;
+                    font-family: inherit !important;
+                    font-weight: inherit !important;
+                    line-height: inherit !important;
+                  }
+            
+                  /* ANDROID CENTER FIX */
+                  div[style*="margin: 16px 0;"] {
+                    margin: 0 !important;
+                  }
+                </style>
+              </head>
+              <body
+                style="
+                  background-color: #f4f4f4;
+                  margin: 0 !important;
+                  padding: 0 !important;
+                "
+              >
+                <!-- HIDDEN PREHEADER TEXT -->
+                <div
+                  style="
+                    display: none;
+                    font-size: 1px;
+                    color: #fefefe;
+                    line-height: 1px;
+                    font-family: 'Lato', Helvetica, Arial, sans-serif;
+                    max-height: 0px;
+                    max-width: 0px;
+                    opacity: 0;
+                    overflow: hidden;
+                  "
+                >
+                  Looks like you tried signing in a few too many times. Let's see if we can
+                  get you back into your account.
+                </div>
+            
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                  <!-- LOGO -->
+                  <tr>
+                    <td bgcolor="#f4f4f4" align="center">
+                      <table border="0" cellpadding="0" cellspacing="0" width="480">
+                        <tr>
+                          <td
+                            align="center"
+                            valign="top"
+                            style="padding: 40px 10px 40px 10px"
+                          >
+                            <img
+                              alt="Logo"
+                              src="https://i.ibb.co/P9Jd4Zy/logo192.png"
+                              width="100"
+                              height="100"
+                              style="
+                                display: block;
+                                font-family: 'Lato', Helvetica, Arial, sans-serif;
+                                color: #ffffff;
+                                font-size: 18px;
+                              "
+                              border="0"
+                            />
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <!-- HERO -->
+                  <tr>
+                    <td bgcolor="#f4f4f4" align="center" style="padding: 0px 10px 0px 10px">
+                      <table border="0" cellpadding="0" cellspacing="0" width="480">
+                        <tr>
+                          <td
+                            bgcolor="#ffffff"
+                            align="center"
+                            valign="top"
+                            style="
+                              padding: 40px 20px 20px 20px;
+                              border-radius: 4px 4px 0px 0px;
+                              color: #111111;
+                              font-family: 'Lato', Helvetica, Arial, sans-serif;
+                              font-size: 48px;
+                              font-weight: 400;
+                              letter-spacing: 4px;
+                              line-height: 48px;
+                            "
+                          >
+                            <h1 style="font-size: 32px; font-weight: 400; margin: 0">
+                              Here Your OTP for Reset Password
+                            </h1>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <!-- COPY BLOCK -->
+                  <tr>
+                    <td bgcolor="#f4f4f4" align="center" style="padding: 0px 10px 0px 10px">
+                      <table border="0" cellpadding="0" cellspacing="0" width="480">
+                        <!-- COPY -->
+                        <tr>
+                          <td
+                            bgcolor="#ffffff"
+                            align="left"
+                            style="
+                              padding: 20px 30px 40px 30px;
+                              color: #666666;
+                              font-family: 'Lato', Helvetica, Arial, sans-serif;
+                              font-size: 18px;
+                              font-weight: 400;
+                              line-height: 25px;
+                            "
+                          >
+                            <p style="margin: 0">
+                              Please click the below code to reset your password
+                            </p>
+                          </td>
+                        </tr>
+                        <!-- BULLETPROOF BUTTON -->
+                        <tr>
+                          <td bgcolor="#ffffff" align="left">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                              <tr>
+                                <td
+                                  bgcolor="#ffffff"
+                                  align="center"
+                                  style="padding: 20px 30px 60px 30px"
+                                >
+                                  <table border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                      <td
+                                        align="center"
+                                        style="border-radius: 3px"
+                                        bgcolor="#DB3022"
+                                      >
+                                        <a
+                                          href="http://mamarecipe.site:3000/"
+                                          style="
+                                            font-size: 20px;
+                                            font-family: Helvetica, Arial, sans-serif;
+                                            color: #ffffff;
+                                            text-decoration: none;
+                                            color: #ffffff;
+                                            text-decoration: none;
+                                            padding: 15px 25px;
+                                            border-radius: 2px;
+                                            border: 1px solid #efc81a
+                                            display: inline-block;
+                                          "
+                                          >${otp}</a
+                                        >
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+            
+                  <!-- COPY CALLOUT -->
+                  <tr>
+                    <td bgcolor="#f4f4f4" align="center" style="padding: 0px 10px 0px 10px">
+                      <table border="0" cellpadding="0" cellspacing="0" width="480">
+                        <!-- SUPPORT CALLOUT -->
+                        <tr>
+                          <td
+                            bgcolor="#f4f4f4"
+                            align="center"
+                            style="padding: 30px 10px 0px 10px"
+                          >
+                            <table border="0" cellpadding="0" cellspacing="0" width="480">
+                              <!-- HEADLINE -->
+                              <tr>
+                                <td
+                                  bgcolor="#C6C2ED"
+                                  align="center"
+                                  style="
+                                    padding: 30px 30px 30px 30px;
+                                    border-radius: 4px 4px 4px 4px;
+                                    color: #666666;
+                                    font-family: 'Lato', Helvetica, Arial, sans-serif;
+                                    font-size: 18px;
+                                    font-weight: 400;
+                                    line-height: 25px;
+                                  "
+                                >
+                                  <h2
+                                    style="
+                                      font-size: 20px;
+                                      font-weight: 400;
+                                      color: #111111;
+                                      margin: 0;
+                                    "
+                                  >
+                                    If you dit not request reset password, please ignore this email.
+                                  </h2>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                        <!-- PERMISSION REMINDER -->
+                        <tr>
+                          <td
+                            bgcolor="#f4f4f4"
+                            align="left"
+                            style="
+                              padding: 0px 30px 30px 30px;
+                              color: #666666;
+                              font-family: 'Lato', Helvetica, Arial, sans-serif;
+                              font-size: 14px;
+                              font-weight: 400;
+                              line-height: 18px;
+                            "
+                          ></td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </body>
+            </html>
+            `,
             })
           );
         } else {
@@ -256,7 +869,7 @@ module.exports = {
             bcrypt.hash(password, salt, (err, hashedPassword) => {
               if (err) {
                 reject("Please Input New Password");
-              } 
+              }
               const qs = "UPDATE users SET password = ? WHERE email = ?";
               db.query(qs, [hashedPassword, email], (err, data) => {
                 if (data !== 0) {
