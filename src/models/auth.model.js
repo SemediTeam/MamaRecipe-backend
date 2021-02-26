@@ -274,7 +274,7 @@ module.exports = {
                                           <td
                                             align="center"
                                             style="border-radius: 3px"
-                                            bgcolor="#DB3022"
+                                            bgcolor="#efc81a"
                                           >
                                             <a
                                               href="${process.env.LOCAL}/auth/verify/${token}"
@@ -707,7 +707,7 @@ module.exports = {
                             "
                           >
                             <h1 style="font-size: 32px; font-weight: 400; margin: 0">
-                              Here Your OTP for Reset Password
+                              OTP Reset Password
                             </h1>
                           </td>
                         </tr>
@@ -733,7 +733,7 @@ module.exports = {
                             "
                           >
                             <p style="margin: 0">
-                              Please click the below code to reset your password
+                              Please input the below code to reset your password
                             </p>
                           </td>
                         </tr>
@@ -752,7 +752,7 @@ module.exports = {
                                       <td
                                         align="center"
                                         style="border-radius: 3px"
-                                        bgcolor="#DB3022"
+                                        bgcolor="#efc81a"
                                       >
                                         <a
                                           href="http://mamarecipe.site:3000/"
