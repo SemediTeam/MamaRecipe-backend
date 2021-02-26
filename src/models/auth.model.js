@@ -192,7 +192,7 @@ module.exports = {
                               >
                                 <img
                                   alt="Logo"
-                                  src="https://i.ibb.co/P9Jd4Zy/logo192.png"
+                                  src="https://raw.githubusercontent.com/SemediTeam/MamaRecipe-frontend/main/public/web_hi_res_512.png"
                                   width="100"
                                   height="100"
                                   style="
@@ -670,7 +670,7 @@ module.exports = {
                           >
                             <img
                               alt="Logo"
-                              src="https://i.ibb.co/P9Jd4Zy/logo192.png"
+                              src="https://raw.githubusercontent.com/SemediTeam/MamaRecipe-frontend/main/public/web_hi_res_512.png"
                               width="100"
                               height="100"
                               style="
