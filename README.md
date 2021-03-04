@@ -91,6 +91,13 @@ Open [http://localhost:4000/](http://localhost:4000/) to view it in the browser.
 
 For more info visit [Postman 1](https://documenter.getpostman.com/view/13522642/TVsuCSZz)
                     [Postman 2](https://documenter.getpostman.com/view/13520286/TVsxB6ht)
+
+## Related Project
+
+RESTful API for this web application, clone this for development Mama Recipe.
+
+<a href="https://github.com/SemediTeam/MamaRecipe-frontend">Mama Recipe Client</a>
+
 ## License
 
 Distributed under the [MIT](https://github.com/SemediTeam/recipedia-backend/blob/main/LICENSE) License.
