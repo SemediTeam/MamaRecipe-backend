@@ -382,11 +382,6 @@ module.exports = {
   postLogin: (body) => {
     return new Promise((resolve, reject) => {
       const { email, password } = body;
-      // if (body.email == 0 || body.password == 0) {
-      //   return reject({
-      //     msg: "Please enter the required fields",
-      //   });
-      // }
       const qs =
         "SELECT id_user, email, name, user_img, isVerified, password FROM users WHERE email = ?";
       db.query(qs, email, (err, data) => {

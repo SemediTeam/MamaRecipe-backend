@@ -22,8 +22,6 @@ module.exports = {
     const { id } = req.params;
     const { body } = req;
 
-    // const filePath = process.env.LOCAL + "/images/" + req.file.filename;
-
     const updateBody = {
       ...body,
       //   user_img: filePath,
@@ -32,9 +30,6 @@ module.exports = {
     userModel
       .updateUser(updateBody, id)
       .then((data) => {
-        // if (req.file == undefined) {
-        //   form.error(res, "No Images Selected", "err", 400);
-        // } else {
         form.success(
           res,
           "Data successfully updated",
